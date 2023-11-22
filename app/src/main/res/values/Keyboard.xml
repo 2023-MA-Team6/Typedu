@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="random_korean_words">
+        <item>낳</item>
+        <item>앟</item>
+        <item>궭</item>
+        <item>샛</item>
+        <item>애</item>
+        <item>기</item>
+        <item>주</item>
+        <item>줆</item>
+        <item>국</item>
+        <item>샛</item>
+    </string-array>
+</resources>

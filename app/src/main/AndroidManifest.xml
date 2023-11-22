@@ -22,10 +22,11 @@
             android:name=".WordActivity"
             android:exported="false" />
         <activity
-            android:name=".KeyboardActivity"
+            android:name="MainActivity"
             android:exported="false" />
+        <!--.MainActivity -->
         <activity
-            android:name=".MainActivity"
+            android:name=".KeyboardActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
