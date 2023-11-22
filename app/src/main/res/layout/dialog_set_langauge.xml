@@ -9,4 +9,15 @@
         android:layout_height="wrap_content"
         android:text="언어 설정"/>
 
+    <Spinner
+        android:id="@+id/language_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/language"/>
+    <Button
+        android:id="@+id/cancel_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="닫기"/>
+
 </LinearLayout>
