@@ -5,6 +5,7 @@ import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.typedu.databinding.ActivityKeyboardBinding
@@ -39,8 +40,8 @@ class KeyboardActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
                 val currentWordView = binding.WordView.getChildAt(2) as? TextView
                 val currentWord = currentWordView?.text.toString()
-                val currentWordText = binding.currentWordText.text.toString()
-                if (currentWord == currentWordText) {
+                val currentEditText = binding.currentWordText.text.toString()
+                if (currentWord == currentEditText) {
                     typedCharCount++
                     binding.typedChars.text = typedCharCount.toString()
 
@@ -48,12 +49,7 @@ class KeyboardActivity : AppCompatActivity() {
                     shiftTextLeft()
                     showNextWord()
 
-                    // 새로운 값은 3번째 TextView에 저장
-                    /*binding.WordView.getChildAt(2)?.let {
-                        if (it is TextView) {
-                            it.text = currentWordText
-                        }
-                    }*/
+                    // edittext 값 초기화
 
                 }
 
@@ -82,14 +78,30 @@ class KeyboardActivity : AppCompatActivity() {
 
     private fun showNextWord() {
         val currentWordTextView = binding.WordView.getChildAt(2) as TextView
+        val nextWordTextView = binding.WordView.getChildAt(3) as TextView
+        val thirdWordTextView = binding.WordView.getChildAt(4) as TextView
 
         if (currentWordIndex < wordList.size) {
             currentWordTextView.text = wordList[currentWordIndex]
+            if(currentWordIndex + 2 < wordList.size) {
+                nextWordTextView.text = wordList[currentWordIndex + 1]
+                thirdWordTextView.text = wordList[currentWordIndex + 2]
+            } else if(currentWordIndex + 1 == wordList.size - 1) {
+                nextWordTextView.text = wordList[currentWordIndex + 1]
+                thirdWordTextView.text = ""
+            } else if(currentWordIndex == wordList.size - 1) {
+                nextWordTextView.text = ""
+                thirdWordTextView.text = ""
+            }
             currentWordIndex++
         } else {
-            currentWordIndex = 0
+            /*currentWordIndex = 0
             currentWordTextView.text = wordList[currentWordIndex]
+            결과창 코드는 여기에 삽입
+            */
         }
+
+        Log.d("bowon", currentWordIndex.toString());
     }
     private fun shiftTextLeft() {
         // 1번째 TextView 초기화
