@@ -50,7 +50,7 @@ class KeyboardActivity : AppCompatActivity() {
                     showNextWord()
 
                     // edittext 값 초기화
-
+                    binding.currentWordText.setText("")
                 }
 
                 if (!isTyping) {
