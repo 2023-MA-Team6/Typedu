@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MainMenuBtnStyle">
+        <item name="android:layout_width">275dp</item>
+        <item name="android:layout_height">75dp</item>
+        <item name="android:layout_margin">12dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/main_menu_btn_shape</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:elevation">6dp</item>
+        <item name="cornerRadius">15dp</item>
+        <item name="android:textColor">#FFF</item>
+        <item name="android:textSize">35sp</item>
+        <item name="android:fontFamily">@font/noto_sans_kr_bold</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+</resources>

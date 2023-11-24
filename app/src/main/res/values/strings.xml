@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Typedu</string>
+    <string name="main_menu1_name">자판 연습</string>
+    <string name="main_menu2_name">낱말 연습</string>
+    <string name="main_menu3_name">짧은 글 연습</string>
+    <string name="main_menu4_name">긴 글 연습</string>
+    <string name="main_setting">언어 설정</string>
 </resources>
