@@ -2,36 +2,90 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#FFFFFF">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Typedu"/>
-    <Button
-        android:id="@+id/key_pr_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="자판 연습"/>
-    <Button
-        android:id="@+id/word_pr_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="낱말 연습"/>
-    <Button
-        android:id="@+id/sentence_pr_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="짧은 글 연습"/>
-    <Button
-        android:id="@+id/article_pr_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="긴 글 연습"/>
-    <Button
-        android:id="@+id/language_setting_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="언어 설정"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="60sp"
+            android:textStyle="bold"
+            android:textColor="#000"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/key_pr_btn"
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:background="#FA0"
+            android:text="자판 연습"
+            android:textSize="35sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/word_pr_btn"
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:background="#FA0"
+            android:text="낱말 연습"
+            android:textSize="35sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/sentence_pr_btn"
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:background="#FA0"
+            android:text="짧은 글 연습"
+            android:textSize="35sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/article_pr_btn"
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:background="#FA0"
+            android:text="긴 글 연습"
+            android:textSize="35sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:gravity="bottom">
+
+        <Button
+            android:id="@+id/language_setting_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="20dp"
+            android:background="#0000"
+            android:text="언어 설정"
+            android:textSize="25sp"
+            android:textColor="#000"/>
+    </LinearLayout>
 
 </LinearLayout>
