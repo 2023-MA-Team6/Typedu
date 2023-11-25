@@ -60,7 +60,7 @@
             android:id="@+id/accuracy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="100%"/>
+            android:text="0%"/>
     </LinearLayout>
 
     <!-- 입력할 현재 단어 표시 -->

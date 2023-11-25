@@ -15,8 +15,12 @@ class KeyboardActivity : AppCompatActivity() {
     private lateinit var wordList: List<String>
     private var currentWordIndex = 0
     private var typedCharCount = 0
+    private var passedCount = 0
     private var currentTypingSpeed = 0
     private var isTyping = false
+
+    private var lastTypedCount = 0
+    private val handler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +45,13 @@ class KeyboardActivity : AppCompatActivity() {
                 val currentWordView = binding.WordView.getChildAt(2) as? TextView
                 val currentWord = currentWordView?.text.toString()
                 val currentEditText = binding.currentWordText.text.toString()
-                if (currentWord == currentEditText) {
-                    typedCharCount++
-                    binding.typedChars.text = typedCharCount.toString()
+
+                if (currentWord == currentEditText || currentWord.length < currentEditText.length) {
+                    typedCharCount += 2
+                    if(currentWord == currentEditText) {
+                        passedCount++
+                    }
+                    binding.typedChars.text = passedCount.toString()
 
                     // 단어 일치 시 다음 단어로 이동하고 텍스트를 왼쪽으로 이동
                     shiftTextLeft()
@@ -51,6 +59,9 @@ class KeyboardActivity : AppCompatActivity() {
 
                     // edittext 값 초기화
                     binding.currentWordText.setText("")
+
+                    // 미입력 시 타수 초기화
+                    lastTypedCount = 0
                 }
 
                 if (!isTyping) {
@@ -59,6 +70,21 @@ class KeyboardActivity : AppCompatActivity() {
                 }
             }
         })
+
+        // 주기적으로 미입력 시 타수 감소 체크 및 1분마다 예측된 타수 초기화
+        val checkTypingRunnable = object : Runnable {
+            override fun run() {
+                if (lastTypedCount == typedCharCount && typedCharCount > 0) {
+                    // 미입력 시 타수 감소
+                    typedCharCount -= 2
+                }
+                lastTypedCount = typedCharCount
+
+                handler.postDelayed(this, 1000)
+            }
+        }
+
+        handler.postDelayed(checkTypingRunnable, 1000)
     }
 
     private fun startTypingSpeedCalculator() {
@@ -101,7 +127,6 @@ class KeyboardActivity : AppCompatActivity() {
             */
         }
 
-        Log.d("bowon", currentWordIndex.toString());
     }
     private fun shiftTextLeft() {
         // 1번째 TextView 초기화

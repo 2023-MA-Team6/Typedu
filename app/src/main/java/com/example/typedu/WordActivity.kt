@@ -13,9 +13,13 @@ class WordActivity : AppCompatActivity() {
     private lateinit var wordList: List<String>
     private var currentWordIndex = 0
     private var typedCharCount = 0
-    private var correctCharCount = 0
+
+    private var typedWordCount = 0
+    private var correctWordCount = 0
+
     private var isTyping = false
     private var lastTypedCount = 0
+    private val handler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,16 +41,18 @@ class WordActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                val currentWordView = binding.currentWord
-                val nextWordView = binding.nextWord
-
-                val currentWord = currentWordView.text.toString()
+                val currentWord = binding.currentWord.text.toString()
                 val currentEditText = binding.currentWordText.text.toString()
 
-                if (currentWord == currentEditText) {
+                if (currentWord == currentEditText || currentWord.length < currentEditText.length) {
                     typedCharCount += currentWord.length
-                    correctCharCount += currentWord.length
+
+                    typedWordCount++
+                    if(currentWord == currentEditText) {
+                        correctWordCount++
+                    }
                     binding.accuracy.text = calculateAccuracy().toString() + "%"
+
                     // 단어 일치 시 다음 단어로 이동
                     showNextWord()
 
@@ -65,17 +71,13 @@ class WordActivity : AppCompatActivity() {
         })
 
         // 주기적으로 미입력 시 타수 감소 체크 및 1분마다 예측된 타수 초기화
-        val handler = Handler()
         val checkTypingRunnable = object : Runnable {
             override fun run() {
                 if (lastTypedCount == typedCharCount && typedCharCount > 0) {
                     // 미입력 시 타수 감소
                     typedCharCount--
-                    correctCharCount--
-                    //binding.currentTyping.text = typedCharCount.toString()
                 }
                 lastTypedCount = typedCharCount
-
 
                 handler.postDelayed(this, 1000)
             }
@@ -85,8 +87,6 @@ class WordActivity : AppCompatActivity() {
     }
 
     private fun startTypingSpeedCalculator() {
-        val handler = Handler()
-
         val typingSpeedCalculator = object : Runnable {
             override fun run() {
                 val currentTypingSpeed = (typedCharCount * 60) / 5
@@ -117,8 +117,8 @@ class WordActivity : AppCompatActivity() {
     }
 
     private fun calculateAccuracy(): Int {
-        return if (typedCharCount > 0) {
-            (correctCharCount.toDouble() / typedCharCount.toDouble() * 100).toInt()
+        return if (typedWordCount > 0) {
+            (correctWordCount.toDouble() / typedWordCount.toDouble() * 100).toInt()
         } else {
             0
         }
