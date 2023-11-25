@@ -1,10 +1,11 @@
+package com.example.typedu
+
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.typedu.R
 import com.example.typedu.databinding.ActivityWordBinding
 
 class WordActivity : AppCompatActivity() {
@@ -14,6 +15,7 @@ class WordActivity : AppCompatActivity() {
     private var typedCharCount = 0
     private var correctCharCount = 0
     private var isTyping = false
+    private var lastTypedCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,24 +43,18 @@ class WordActivity : AppCompatActivity() {
                 val currentWord = currentWordView.text.toString()
                 val currentEditText = binding.currentWordText.text.toString()
 
-                // 입력된 각 글자에 대해 타수 및 정확도 갱신
-                if (currentEditText.isNotEmpty()) {
-                    typedCharCount += 1
-
-                    if (currentWord.startsWith(currentEditText)) {
-                        // 현재 입력한 글자가 정답과 일치하는 경우
-                        correctCharCount += 1
-                    }
-
-                    binding.accuracy.text = calculateAccuracy().toString() + "%"
-                }
-
-                // 현재 단어와 일치할 때만 다음 단어로 이동
                 if (currentWord == currentEditText) {
+                    typedCharCount += currentWord.length
+                    correctCharCount += currentWord.length
+                    binding.accuracy.text = calculateAccuracy().toString() + "%"
                     // 단어 일치 시 다음 단어로 이동
                     showNextWord()
+
                     // edittext 값 초기화
                     binding.currentWordText.setText("")
+
+                    // 미입력 시 타수 초기화
+                    lastTypedCount = 0
                 }
 
                 if (!isTyping) {
@@ -67,6 +63,25 @@ class WordActivity : AppCompatActivity() {
                 }
             }
         })
+
+        // 주기적으로 미입력 시 타수 감소 체크 및 1분마다 예측된 타수 초기화
+        val handler = Handler()
+        val checkTypingRunnable = object : Runnable {
+            override fun run() {
+                if (lastTypedCount == typedCharCount && typedCharCount > 0) {
+                    // 미입력 시 타수 감소
+                    typedCharCount--
+                    correctCharCount--
+                    //binding.currentTyping.text = typedCharCount.toString()
+                }
+                lastTypedCount = typedCharCount
+
+
+                handler.postDelayed(this, 1000)
+            }
+        }
+
+        handler.postDelayed(checkTypingRunnable, 1000)
     }
 
     private fun startTypingSpeedCalculator() {
@@ -97,10 +112,7 @@ class WordActivity : AppCompatActivity() {
             }
             currentWordIndex++
         } else {
-            /*currentWordIndex = 0
-            currentWordTextView.text = wordList[currentWordIndex]
-            결과창 코드는 여기에 삽입
-            */
+            // 추가 작업이 필요한 경우 여기에 코드를 추가하세요.
         }
     }
 
