@@ -21,6 +21,9 @@ class WordActivity : AppCompatActivity() {
     private var lastTypedCount = 0
     private val handler = Handler()
 
+    private var currentTypingSpeed = 0
+    private var highestTypingSpeed = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWordBinding.inflate(layoutInflater)
@@ -89,8 +92,14 @@ class WordActivity : AppCompatActivity() {
     private fun startTypingSpeedCalculator() {
         val typingSpeedCalculator = object : Runnable {
             override fun run() {
-                val currentTypingSpeed = (typedCharCount * 60) / 5
+                currentTypingSpeed = (typedCharCount * 60) / 5
                 binding.currentTyping.text = currentTypingSpeed.toString()
+
+                // 최고 타수 갱신
+                if (currentTypingSpeed > highestTypingSpeed) {
+                    highestTypingSpeed = currentTypingSpeed
+                    binding.highestTyping.text = highestTypingSpeed.toString()
+                }
 
                 handler.postDelayed(this, 1000)
             }
