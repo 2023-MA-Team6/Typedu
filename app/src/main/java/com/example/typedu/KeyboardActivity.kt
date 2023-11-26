@@ -9,6 +9,11 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.typedu.databinding.ActivityKeyboardBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 
 class KeyboardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityKeyboardBinding
@@ -20,7 +25,7 @@ class KeyboardActivity : AppCompatActivity() {
     private var isTyping = false
 
     private var lastTypedCount = 0
-    private val handler = Handler()
+    private var elapsedTimeInSeconds = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +52,7 @@ class KeyboardActivity : AppCompatActivity() {
                 val currentEditText = binding.currentWordText.text.toString()
 
                 if (currentWord == currentEditText || currentWord.length < currentEditText.length) {
-                    typedCharCount += 2
+                    typedCharCount++
                     if(currentWord == currentEditText) {
                         passedCount++
                     }
@@ -71,35 +76,23 @@ class KeyboardActivity : AppCompatActivity() {
             }
         })
 
-        // 주기적으로 미입력 시 타수 감소 체크 및 1분마다 예측된 타수 초기화
-        val checkTypingRunnable = object : Runnable {
-            override fun run() {
-                if (lastTypedCount == typedCharCount && typedCharCount > 0) {
-                    // 미입력 시 타수 감소
-                    typedCharCount -= 2
-                }
-                lastTypedCount = typedCharCount
-
-                handler.postDelayed(this, 1000)
+        GlobalScope.launch(Dispatchers.Main) {
+            while (isActive) {
+                delay(1000)
+                elapsedTimeInSeconds++
             }
         }
-
-        handler.postDelayed(checkTypingRunnable, 1000)
     }
 
     private fun startTypingSpeedCalculator() {
-        val handler = Handler()
-
-        val typingSpeedCalculator = object : Runnable {
-            override fun run() {
-                currentTypingSpeed = (typedCharCount * 60) / 5
+        GlobalScope.launch(Dispatchers.Main) {
+            while (isActive) {
+                delay(1000)
+                val currentTypingSpeed = (typedCharCount * 60) / elapsedTimeInSeconds
+                Log.d("bowon", "$typedCharCount , $elapsedTimeInSeconds")
                 binding.currentTyping.text = currentTypingSpeed.toString()
-
-                handler.postDelayed(this, 1000)
             }
         }
-
-        handler.postDelayed(typingSpeedCalculator, 1000)
     }
 
     private fun showNextWord() {
