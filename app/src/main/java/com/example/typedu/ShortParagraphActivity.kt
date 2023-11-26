@@ -146,7 +146,6 @@ class ShortParagraphActivity : AppCompatActivity() {
 
     private fun calculateTypingSpeedPerSecond(typedCharCount: Int, elapsedTimeInSeconds: Int): Int {
         return if (elapsedTimeInSeconds > 0) {
-            Log.d("bowon", "$typedCharCount , $elapsedTimeInSeconds")
             typedCharCount * 60 / elapsedTimeInSeconds
         } else {
             0
