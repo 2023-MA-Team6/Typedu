@@ -5,4 +5,11 @@
     <string name="main_menu3_name">짧은 글 연습</string>
     <string name="main_menu4_name">긴 글 연습</string>
     <string name="main_setting">언어 설정</string>
+    <string name="popup_artisel_name">긴 글 선택</string>
+    <string name="popup_langset_name">언어 설정</string>
+    <string name="popup_targetset_name">목표 설정</string>
+    <string name="popup_start">시작</string>
+    <string name="popup_next">다음</string>
+    <string name="popup_cancel">취소</string>
+    <string name="popup_loadnewarticle">새 글 불러오기</string>
 </resources>

@@ -7,21 +7,28 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="목표 설정"/>
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        style="@style/PopupTitleStyle"
+        android:text="@string/popup_targetset_name"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="목표 타수"/>
+
         <EditText
             android:id="@+id/target_score_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="250"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,16 +38,20 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="목표 정확도"/>
+
         <EditText
             android:id="@+id/target_accuracy_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="95"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,19 +59,27 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+
         <Button
             android:id="@+id/cancel_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="취소"/>
+            android:layout_weight="1"
+            style="@style/PopupMenuBtnStyle"
+            android:background="@drawable/grey_btn_shape"
+            android:text="@string/popup_cancel"/>
+
         <Button
-            android:id="@+id/start_btn"
-            android:layout_width="wrap_content"
+            android:id="@+id/next_btn"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="시작"/>
+            android:layout_weight="1"
+            style="@style/PopupMenuBtnStyle"
+            android:text="@string/popup_next"/>
     </LinearLayout>
 
 </LinearLayout>

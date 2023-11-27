@@ -8,7 +8,8 @@
         <item name="android:windowBackground">#FFF</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:navigationBarColor">#CCC</item>
-        <item name="android:windowLightNavigationBar">true</item> <!-- 안드로이드 오레오부터 가능해서 theme.xml 분리 생각 중 -->
+        <item name="android:windowLightNavigationBar">true</item> <!-- 안드로이드 오레오부터 가능해서 theme.xml 분리해야할 수도 있습니다.-->
+        <item name="android:fontFamily">@font/noto_sans_kr_regular</item>
     </style>
 
     <style name="Theme.Typedu" parent="Base.Theme.Typedu" />
