@@ -80,13 +80,14 @@ class MainActivity : AppCompatActivity() {
         setArticleDialog.cancelBtn.setOnClickListener {
             // 취소
         }
-        setArticleDialog.articlesList.setOnItemClickListener { parent, view, position, id ->
-            Log.d("ArticleDialog", "$position")
-        }
     }
 
     fun showLanguageSetDialog() {
         val setLanguageSetDialog = DialogSetLangaugeBinding.inflate(layoutInflater)
+        val languages = resources.getStringArray(R.array.language)
+        val adapter = ArrayAdapter(this, R.layout.spinner_language_list, languages)
+
+        setLanguageSetDialog.languageSpinner.adapter = adapter
 
         AlertDialog.Builder(this)
             .setView(setLanguageSetDialog.root)

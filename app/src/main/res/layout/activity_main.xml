@@ -59,7 +59,7 @@
             android:layout_gravity="end"
             android:layout_margin="20dp"
             android:background="#0000"
-            android:drawableEnd="@drawable/option_icon"
+            android:drawableEnd="@drawable/icon_option"
             android:drawablePadding="10dp"
             android:text="@string/main_setting"
             android:textColor="#666"

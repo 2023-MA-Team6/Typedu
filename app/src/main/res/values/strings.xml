@@ -5,11 +5,14 @@
     <string name="main_menu3_name">짧은 글 연습</string>
     <string name="main_menu4_name">긴 글 연습</string>
     <string name="main_setting">언어 설정</string>
-    <string name="popup_artisel_name">긴 글 선택</string>
-    <string name="popup_langset_name">언어 설정</string>
-    <string name="popup_targetset_name">목표 설정</string>
+    <string name="popup_articleselect_title">긴 글 선택</string>
+    <string name="popup_articleselect_load">새 글 불러오기</string>
+    <string name="popup_languageset_title">언어 설정</string>
+    <string name="popup_targetset_title">목표 설정</string>
+    <string name="popup_targetset_targetspeed">목표 타수</string>
+    <string name="popup_targetset_targetaccuracy">목표 정확도</string>
     <string name="popup_start">시작</string>
     <string name="popup_next">다음</string>
     <string name="popup_cancel">취소</string>
-    <string name="popup_loadnewarticle">새 글 불러오기</string>
+    <string name="popup_close">닫기</string>
 </resources>

@@ -11,17 +11,26 @@
         android:layout_gravity="center"
         android:layout_margin="20dp"
         style="@style/PopupTitleStyle"
-        android:text="긴 글 선택"/>
+        android:text="@string/popup_articleselect_title"/>
 
-    <ListView
-        android:id="@+id/articles_list"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/typing_list_shape"
-        android:divider="#0fff"/>
+        android:padding="3dp"
+        android:background="@drawable/shape_typing_list">
+
+        <ListView
+            android:id="@+id/articles_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:choiceMode="singleChoice"
+            android:listSelector="@drawable/selector_typing_list"
+            android:divider="#0fff"/>
+    </LinearLayout>
 
     <Button
         android:id="@+id/load_btn"
@@ -33,7 +42,7 @@
         android:fontFamily="@font/noto_sans_kr_bold"
         android:textColor="@color/typeedu_blue"
         android:textSize="16sp"
-        android:text="@string/popup_loadnewarticle"/>
+        android:text="@string/popup_articleselect_load"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             style="@style/PopupMenuBtnStyle"
-            android:background="@drawable/grey_btn_shape"
+            android:background="@drawable/shape_grey_btn"
             android:text="@string/popup_cancel"/>
 
         <Button
