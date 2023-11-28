@@ -8,7 +8,6 @@
     android:paddingBottom="10dp"
     android:gravity="start"
     android:background="@drawable/selector_typing_list"
-    android:fontFamily="@font/noto_sans_kr_bold"
     android:textColor="@drawable/selector_list_text"
     android:textSize="18sp"
     android:singleLine="true"

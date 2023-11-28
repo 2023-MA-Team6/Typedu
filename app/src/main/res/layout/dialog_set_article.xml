@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:choiceMode="singleChoice"
             android:listSelector="@drawable/selector_typing_list"
-            android:divider="#0fff"/>
+            android:divider="#ffff00"/>
     </LinearLayout>
 
     <Button
@@ -39,7 +39,6 @@
         android:layout_marginEnd="20dp"
         android:layout_gravity="end"
         android:background="@android:color/transparent"
-        android:fontFamily="@font/noto_sans_kr_bold"
         android:textColor="@color/typeedu_blue"
         android:textSize="16sp"
         android:text="@string/popup_articleselect_load"/>

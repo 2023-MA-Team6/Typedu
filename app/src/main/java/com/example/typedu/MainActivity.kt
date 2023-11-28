@@ -1,8 +1,11 @@
 package com.example.typedu
 
+import android.content.Context
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -12,6 +15,7 @@ import com.example.typedu.databinding.ActivityMainBinding
 import com.example.typedu.databinding.DialogSetArticleBinding
 import com.example.typedu.databinding.DialogSetLangaugeBinding
 import com.example.typedu.databinding.DialogSetTargetBinding
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,10 +60,15 @@ class MainActivity : AppCompatActivity() {
     fun showTargetDialog() {
         val setTargetDialog = DialogSetTargetBinding.inflate(layoutInflater)
 
-        AlertDialog.Builder(this)
+        val alertDialog =  AlertDialog.Builder(this)
             .setView(setTargetDialog.root)
+            .setCancelable(true)
             .create()
-            .show()
+
+        setTargetDialog.cancelBtn.setOnClickListener {
+            alertDialog.dismiss()
+        }
+        alertDialog.show()
     }
 
     fun showArticleDialog() {
@@ -69,17 +78,18 @@ class MainActivity : AppCompatActivity() {
 
         setArticleDialog.articlesList.adapter = adapter
 
-        AlertDialog.Builder(this)
+         val alertDialog = AlertDialog.Builder(this)
             .setView(setArticleDialog.root)
+            .setCancelable(true)
             .create()
-            .show()
 
         setArticleDialog.nextBtn.setOnClickListener {
             showTargetDialog()
         }
         setArticleDialog.cancelBtn.setOnClickListener {
-            // 취소
+            alertDialog.dismiss()
         }
+        alertDialog.show()
     }
 
     fun showLanguageSetDialog() {
@@ -89,9 +99,45 @@ class MainActivity : AppCompatActivity() {
 
         setLanguageSetDialog.languageSpinner.adapter = adapter
 
-        AlertDialog.Builder(this)
+        val alertDialog = AlertDialog.Builder(this)
             .setView(setLanguageSetDialog.root)
             .create()
-            .show()
+        setLanguageSetDialog.cancelBtn.setOnClickListener {
+            alertDialog.dismiss()
+            recreate()
+        }
+
+        setLanguageSetDialog.languageSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
+                val selectedLanguage = setLanguageSetDialog.languageSpinner.selectedItem as String
+                Log.d("언어", selectedLanguage)
+                when (selectedLanguage){
+                    "한국어" -> setLocate("ko-rKR")
+                    "English" -> {
+                        setLocate("en")
+                    }
+                    "日本語" -> setLocate("ja")
+                }
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+        }
+        alertDialog.show()
+    }
+
+    // 언어 설정 - "en", "ja", "ko-rKR" 입력하면 그에 맞게 언어가 바뀜
+    private fun setLocate(Lang: String) {
+        Log.d("로그", "setLocate")
+        val locale = Locale(Lang)
+        Locale.setDefault(locale)
+
+        val config = Configuration()
+
+        config.setLocale(locale)
+        baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+
+        val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+        editor.putString("My_Lang", Lang)
+        editor.apply()
     }
 }

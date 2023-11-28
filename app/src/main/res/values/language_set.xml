@@ -2,7 +2,7 @@
 <resources>
     <string-array name="language">
         <item>한국어</item>
-        <item>영어</item>
-        <item>일본어</item>
+        <item>English</item>
+        <item>日本語</item>
     </string-array>
 </resources>
