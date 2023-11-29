@@ -1,11 +1,12 @@
 package com.example.typedu
 
-import android.app.Dialog
-import android.app.ProgressDialog.show
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.example.typedu.databinding.ActivityMainBinding
 import com.example.typedu.databinding.DialogSetArticleBinding
@@ -64,7 +65,7 @@ class MainActivity : AppCompatActivity() {
     fun showArticleDialog() {
         val setArticleDialog = DialogSetArticleBinding.inflate(layoutInflater)
         val titles = resources.getStringArray(R.array.article_title)
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, titles)
+        val adapter = ArrayAdapter(this, R.layout.listview_typing_list, titles)
 
         setArticleDialog.articlesList.adapter = adapter
 
@@ -83,6 +84,10 @@ class MainActivity : AppCompatActivity() {
 
     fun showLanguageSetDialog() {
         val setLanguageSetDialog = DialogSetLangaugeBinding.inflate(layoutInflater)
+        val languages = resources.getStringArray(R.array.language)
+        val adapter = ArrayAdapter(this, R.layout.spinner_language_list, languages)
+
+        setLanguageSetDialog.languageSpinner.adapter = adapter
 
         AlertDialog.Builder(this)
             .setView(setLanguageSetDialog.root)
