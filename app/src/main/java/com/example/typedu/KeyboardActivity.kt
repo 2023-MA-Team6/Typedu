@@ -21,7 +21,6 @@ class KeyboardActivity : AppCompatActivity() {
     private var currentWordIndex = 0
     private var typedCharCount = 0
     private var passedCount = 0
-    private var currentTypingSpeed = 0
     private var isTyping = false
 
     private var lastTypedCount = 0
@@ -89,7 +88,6 @@ class KeyboardActivity : AppCompatActivity() {
             while (isActive) {
                 delay(1000)
                 val currentTypingSpeed = (typedCharCount * 60) / elapsedTimeInSeconds
-                Log.d("bowon", "$typedCharCount , $elapsedTimeInSeconds")
                 binding.currentTyping.text = currentTypingSpeed.toString()
             }
         }

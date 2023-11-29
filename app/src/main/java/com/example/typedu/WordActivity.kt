@@ -95,7 +95,6 @@ class WordActivity : AppCompatActivity() {
             while (isActive) {
                 delay(1000)
                 val currentTypingSpeed = (typedCharCount * 60) / elapsedTimeInSeconds
-                Log.d("bowon", "$typedCharCount , $elapsedTimeInSeconds")
                 binding.currentTyping.text = currentTypingSpeed.toString()
 
                 // 최고 타수 갱신
