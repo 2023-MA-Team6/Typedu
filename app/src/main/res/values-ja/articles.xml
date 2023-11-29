@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="article_title">
+        <item>古今和歌集</item>
+        <item>枕草子</item>
+        <item>徒然草</item>
+        <item>おくのほそ道</item>
+        <item>東海道中膝栗毛</item>
+        <item>みだれ髪</item>
+        <item>羅生門</item>
+    </string-array>
+</resources>

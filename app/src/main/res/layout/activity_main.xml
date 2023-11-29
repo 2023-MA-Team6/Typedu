@@ -20,28 +20,30 @@
             android:text="@string/app_name"
             android:textSize="55sp"
             android:textColor="#000"
-            android:fontFamily="@font/noto_sans_kr_bold"
             android:includeFontPadding="false"/>
 
         <Button
             android:id="@+id/key_pr_btn"
             style="@style/MainMenuBtnStyle"
-            android:text="@string/main_menu1_name"
-            />
+            android:textSize="35sp"
+            android:text="@string/main_menu1_name" />
 
         <Button
             android:id="@+id/word_pr_btn"
             style="@style/MainMenuBtnStyle"
+            android:textSize="35sp"
             android:text="@string/main_menu2_name"/>
 
         <Button
             android:id="@+id/sentence_pr_btn"
             style="@style/MainMenuBtnStyle"
+            android:textSize="35sp"
             android:text="@string/main_menu3_name"/>
 
         <Button
             android:id="@+id/article_pr_btn"
             style="@style/MainMenuBtnStyle"
+            android:textSize="35sp"
             android:text="@string/main_menu4_name"/>
     </LinearLayout>
 
@@ -65,7 +67,6 @@
             android:textColor="#666"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:fontFamily="@font/noto_sans_kr_regular"
             android:includeFontPadding="false"/>
     </LinearLayout>
 

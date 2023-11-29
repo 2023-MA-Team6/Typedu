@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Typedu</string>
+    <string name="main_menu1_name">キーボード練習</string>
+    <string name="main_menu2_name">単語の練習</string>
+    <string name="main_menu3_name">短文演習</string>
+    <string name="main_menu4_name">長文練習</string>
+    <string name="main_setting">言語設定</string>
+    <string name="set_tartget_ta">打</string>
+    <string name="popup_articleselect_title">長文の選択</string>
+    <string name="popup_articleselect_load">新しい記事を読み込む</string>
+    <string name="popup_languageset_title">言語設定</string>
+    <string name="popup_targetset_title">目標設定</string>
+    <string name="popup_targetset_targetspeed">目標打数</string>
+    <string name="popup_targetset_targetaccuracy">目標精度</string>
+    <string name="popup_start">スタート</string>
+    <string name="popup_next">次次</string>
+    <string name="popup_cancel">キャンセル</string>
+    <string name="popup_close">閉じる</string>
+</resources>

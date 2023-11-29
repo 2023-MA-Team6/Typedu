@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Typedu</string>
+    <string name="main_menu1_name">keyboard practice</string>
+    <string name="main_menu2_name">word practice</string>
+    <string name="main_menu3_name">short sentence practice</string>
+    <string name="main_menu4_name">long sentence practice</string>
+    <string name="main_setting">Language settings</string>
+    <string name="set_tartget_ta">strokes</string>
+    <string name="popup_articleselect_title">Select a long sentence</string>
+    <string name="popup_articleselect_load">Load new sentence</string>
+    <string name="popup_languageset_title">Language settings</string>
+    <string name="popup_targetset_title">setting goals</string>
+    <string name="popup_targetset_targetspeed">setting speed</string>
+    <string name="popup_targetset_targetaccuracy">setting accuracy</string>
+    <string name="popup_start">start</string>
+    <string name="popup_next">next</string>
+    <string name="popup_cancel">cancel</string>
+    <string name="popup_close">close</string>
+</resources>

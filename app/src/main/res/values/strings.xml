@@ -6,6 +6,7 @@
     <string name="main_menu4_name">긴 글 연습</string>
     <string name="main_setting">언어 설정</string>
     <string name="popup_articleselect_title">긴 글 선택</string>
+    <string name="set_tartget_ta">타</string>
     <string name="popup_articleselect_load">새 글 불러오기</string>
     <string name="popup_languageset_title">언어 설정</string>
     <string name="popup_targetset_title">목표 설정</string>
