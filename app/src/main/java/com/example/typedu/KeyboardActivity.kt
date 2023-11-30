@@ -22,6 +22,7 @@ class KeyboardActivity : AppCompatActivity() {
     private var typedCharCount = 0
     private var passedCount = 0
     private var isTyping = false
+    private var newTypeC = 0
 
     private var lastTypedCount = 0
     private var elapsedTimeInSeconds = 0
@@ -49,9 +50,9 @@ class KeyboardActivity : AppCompatActivity() {
                 val currentWordView = binding.WordView.getChildAt(2) as? TextView
                 val currentWord = currentWordView?.text.toString()
                 val currentEditText = binding.currentWordText.text.toString()
+                typedCharCount++
 
                 if (currentWord == currentEditText || currentWord.length < currentEditText.length) {
-                    typedCharCount++
                     if(currentWord == currentEditText) {
                         passedCount++
                     }
@@ -87,7 +88,7 @@ class KeyboardActivity : AppCompatActivity() {
         GlobalScope.launch(Dispatchers.Main) {
             while (isActive) {
                 delay(1000)
-                val currentTypingSpeed = (typedCharCount * 60) / elapsedTimeInSeconds
+                val currentTypingSpeed = (typedCharCount * 36) / elapsedTimeInSeconds
                 binding.currentTyping.text = currentTypingSpeed.toString()
             }
         }

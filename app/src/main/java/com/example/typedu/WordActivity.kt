@@ -19,19 +19,19 @@ class WordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWordBinding
     private lateinit var wordList: List<String>
     private var currentWordIndex = 0
-    private var typedCharCount = 0
-
-    private var typedWordCount = 0
     private var correctWordCount = 0
 
     private var isTyping = false
-    private var lastTypedCount = 0
-    private val handler = Handler()
-
-    private var currentTypingSpeed = 0
     private var highestTypingSpeed = 0
 
     private var elapsedTimeInSeconds = 0
+
+    private var typedCharCount = 0
+    private var correctCharCount = 0
+
+    private var totalTypedCount = 0
+    private var totalCorrectCount = 0
+    private var calcTypingSpeed = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,24 +56,7 @@ class WordActivity : AppCompatActivity() {
                 val currentWord = binding.currentWord.text.toString()
                 val currentEditText = binding.currentWordText.text.toString()
 
-                if (currentWord == currentEditText || currentWord.length < currentEditText.length) {
-                    typedCharCount += currentWord.length
-
-                    typedWordCount++
-                    if (currentWord == currentEditText) {
-                        correctWordCount++
-                    }
-                    binding.accuracy.text = calculateAccuracy().toString() + "%"
-
-                    // 단어 일치 시 다음 단어로 이동
-                    showNextWord()
-
-                    // edittext 값 초기화
-                    binding.currentWordText.setText("")
-
-                    // 미입력 시 타수 초기화
-                    lastTypedCount = 0
-                }
+                checkTypingAccuracy(currentWord, currentEditText)
 
                 if (!isTyping) {
                     isTyping = true
@@ -94,13 +77,80 @@ class WordActivity : AppCompatActivity() {
         GlobalScope.launch(Dispatchers.Main) {
             while (isActive) {
                 delay(1000)
-                val currentTypingSpeed = (typedCharCount * 60) / elapsedTimeInSeconds
+                val currentTypingSpeed = calculateTypingSpeedPerSecond(calcTypingSpeed, elapsedTimeInSeconds)
                 binding.currentTyping.text = currentTypingSpeed.toString()
 
                 // 최고 타수 갱신
                 if (currentTypingSpeed > highestTypingSpeed) {
                     highestTypingSpeed = currentTypingSpeed
                     binding.highestTyping.text = highestTypingSpeed.toString()
+                }
+
+                // 정확도 갱신
+                binding.accuracy.text = calculateAccuracy().toString() + "%"
+            }
+        }
+    }
+
+    private fun calculateTypingSpeedPerSecond(typedCharCount: Int, elapsedTimeInSeconds: Int): Int {
+        return if (elapsedTimeInSeconds > 0) {
+            typedCharCount * 36 / elapsedTimeInSeconds
+        } else {
+            0
+        }
+    }
+
+    private var index: Int = 0
+    private var tempTypingCount = 0
+    private fun checkTypingAccuracy(sentence: String, userText: String) {
+        if(sentence == userText) {
+            index = 0
+            totalTypedCount += typedCharCount
+            totalCorrectCount += correctCharCount
+            typedCharCount = 0
+            correctCharCount = 0
+
+            showNextWord()
+
+            correctWordCount++
+            calcTypingSpeed++
+            binding.currentWordText.setText("")
+        } else if(sentence.length < userText.length) {
+            if(sentence[index] == userText[index])
+                correctCharCount++
+            typedCharCount++
+            index = 0
+
+            totalTypedCount += typedCharCount
+            totalCorrectCount += correctCharCount
+            typedCharCount = 0
+            correctCharCount = 0
+
+            showNextWord()
+
+            calcTypingSpeed++
+            binding.currentWordText.setText("")
+        } else {
+            tempTypingCount++
+            if(index < userText.length -1) {
+                if(sentence[index] == userText[index]) {
+                    correctCharCount++
+                    typedCharCount++
+                } else {
+                    typedCharCount++
+                }
+                index++
+                calcTypingSpeed += tempTypingCount
+                tempTypingCount = 0
+            } else if(index > userText.length - 1 && userText.length - 1 >= 0) {
+                typedCharCount--
+                index--
+
+                correctCharCount = 0
+                tempTypingCount = 0
+                for(i in 0 until index) {
+                    if(sentence[i] == userText[i])
+                        correctCharCount++
                 }
             }
         }
@@ -124,8 +174,8 @@ class WordActivity : AppCompatActivity() {
     }
 
     private fun calculateAccuracy(): Int {
-        return if (typedWordCount > 0) {
-            (correctWordCount.toDouble() / typedWordCount.toDouble() * 100).toInt()
+        return if (totalTypedCount > 0) {
+            (totalCorrectCount.toDouble() / totalTypedCount.toDouble() * 100).toInt()
         } else {
             0
         }

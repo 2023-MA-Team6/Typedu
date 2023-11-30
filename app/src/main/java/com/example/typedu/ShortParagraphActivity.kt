@@ -24,10 +24,8 @@ class ShortParagraphActivity : AppCompatActivity() {
     private var calcTypingSpeed = 0
 
     private var isTyping = false
-    private val handler = Handler()
     private var elapsedTimeInSeconds = 0
 
-    private var lastTyping = 0
     private var highestTypingSpeed = 0
     private var MAX_ITEM_COUNT = 0
 
@@ -146,14 +144,14 @@ class ShortParagraphActivity : AppCompatActivity() {
 
     private fun calculateTypingSpeedPerSecond(typedCharCount: Int, elapsedTimeInSeconds: Int): Int {
         return if (elapsedTimeInSeconds > 0) {
-            typedCharCount * 60 / elapsedTimeInSeconds
+            typedCharCount * 36 / elapsedTimeInSeconds
         } else {
             0
         }
     }
 
-
-    var index: Int = 0
+    private var index: Int = 0
+    private var tempTypingCount = 0
     private fun checkTypingAccuracy(sentence: String, userText: String) {
         if(sentence == userText) {
             index = 0
@@ -164,8 +162,8 @@ class ShortParagraphActivity : AppCompatActivity() {
             showNextSentence()
             binding.currentWordText.setText("")
             calcTypingSpeed++
-        } else if(sentence.length <= userText.length) {
-            if(sentence[index + 1] == userText[index + 1])
+        } else if(sentence.length < userText.length) {
+            if(sentence[index] == userText[index])
                 correctCharCount++
             typedCharCount++
             index = 0
@@ -178,6 +176,7 @@ class ShortParagraphActivity : AppCompatActivity() {
             binding.currentWordText.setText("")
             calcTypingSpeed++
         } else {
+            tempTypingCount++
             if(index < userText.length -1) {
 
                 if(sentence[index] == userText[index]) {
@@ -187,12 +186,14 @@ class ShortParagraphActivity : AppCompatActivity() {
                     typedCharCount++
                 }
                 index++
-                calcTypingSpeed++
+                calcTypingSpeed += tempTypingCount
+                tempTypingCount = 0
             } else if(index > userText.length - 1 && userText.length - 1 >= 0) {
                 typedCharCount--
                 index--
 
                 correctCharCount = 0
+                tempTypingCount = 0
                 for(i in 0 until index) {
                     if(sentence[i] == userText[i])
                         correctCharCount++
