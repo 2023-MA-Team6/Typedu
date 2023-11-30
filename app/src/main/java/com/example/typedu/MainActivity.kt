@@ -9,15 +9,22 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.typedu.databinding.ActivityMainBinding
 import com.example.typedu.databinding.DialogSetArticleBinding
 import com.example.typedu.databinding.DialogSetLangaugeBinding
 import com.example.typedu.databinding.DialogSetTargetBinding
 import java.util.Locale
+import java.util.Objects
 
 class MainActivity : AppCompatActivity() {
+    private var targetScore:Int? = 0
+    private var targetAccuracy:Int? = 0
+    private var article:Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -37,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         binding.sentencePrBtn.setOnClickListener {
             Log.d("MainPage", "[메인] 짧은 글 연습 버튼 클릭")
 
-            showTargetDialog()
+            showTargetDialog_short()
         }
 
         // 긴 글 연습 버튼 클릭
@@ -56,8 +63,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // 다이얼로그 -> 커스텀 다이얼로그로 변경 필요
-    fun showTargetDialog() {
+    fun setTarget(scoreInput: EditText, accuracyInput:EditText) {
+        if(scoreInput.text.toString() != "")
+            targetScore = Integer.parseInt(scoreInput.text.toString())
+        else
+            targetScore = 250
+
+        if(accuracyInput.text.toString() != "")
+            targetAccuracy = Integer.parseInt(accuracyInput.text.toString())
+        else
+            targetAccuracy = 90
+    }
+
+    fun showTargetDialog_short() {
         val setTargetDialog = DialogSetTargetBinding.inflate(layoutInflater)
 
         val alertDialog =  AlertDialog.Builder(this)
@@ -67,7 +85,41 @@ class MainActivity : AppCompatActivity() {
 
         setTargetDialog.cancelBtn.setOnClickListener {
             alertDialog.dismiss()
+            Log.d("MainPage_Target_Dialog_short", "[메인_짧은글] 목표 설정 닫기")
         }
+        setTargetDialog.nextBtn.setOnClickListener {
+            setTarget(setTargetDialog.targetScoreInput, setTargetDialog.targetAccuracyInput)
+            Log.d("MainPage_Target_Dialog_short", "[메인_짧은글] 목표 설정 / 타수: $targetScore / 정확도: $targetAccuracy")
+            alertDialog.dismiss()
+
+            // 짧은 글 연습 연결
+        }
+
+        alertDialog.show()
+    }
+
+    fun showTargetDialog_long() {
+        val setTargetDialog = DialogSetTargetBinding.inflate(layoutInflater)
+
+        val alertDialog =  AlertDialog.Builder(this)
+            .setView(setTargetDialog.root)
+            .setCancelable(true)
+            .create()
+
+        setTargetDialog.cancelBtn.setOnClickListener {
+            alertDialog.dismiss()
+            Log.d("MainPage_Target_Dialog_long", "[메인_긴글] 목표 설정 닫기")
+
+            showArticleDialog()
+        }
+        setTargetDialog.nextBtn.setOnClickListener {
+            setTarget(setTargetDialog.targetScoreInput, setTargetDialog.targetAccuracyInput)
+            alertDialog.dismiss()
+            Log.d("MainPage_Target_Dialog_long", "[메인_긴글] 목표 설정 / 타수: $targetScore / 정확도: $targetAccuracy")
+
+            // 긴 글 연습 연결
+        }
+
         alertDialog.show()
     }
 
@@ -83,11 +135,20 @@ class MainActivity : AppCompatActivity() {
             .setCancelable(true)
             .create()
 
-        setArticleDialog.nextBtn.setOnClickListener {
-            showTargetDialog()
-        }
         setArticleDialog.cancelBtn.setOnClickListener {
             alertDialog.dismiss()
+            Log.d("MainPage_Article_Dialog", "[메인_긴글] 글 선택 닫기")
+        }
+        setArticleDialog.nextBtn.setOnClickListener {
+            article = setArticleDialog.articlesList.checkedItemPosition
+            Log.d("MainPage_Article_Dialog", "[메인_긴글] 선택한 글: $article")
+
+            if(article == -1) // 글 선택하지 않을 시
+                Toast.makeText(this, "글을 선택하거나 업로드해주세요", Toast.LENGTH_SHORT).show()
+            else { // 다음 다이얼로그 (목표 설정)
+                alertDialog.dismiss()
+                showTargetDialog_long()
+            }
         }
         alertDialog.show()
     }
