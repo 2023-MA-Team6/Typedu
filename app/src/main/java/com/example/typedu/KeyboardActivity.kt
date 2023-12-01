@@ -4,13 +4,18 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.text.format.DateUtils.formatElapsedTime
 import android.util.Log
+import android.view.LayoutInflater
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.typedu.databinding.ActivityKeyboardBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -22,10 +27,13 @@ class KeyboardActivity : AppCompatActivity() {
     private var typedCharCount = 0
     private var passedCount = 0
     private var isTyping = false
-    private var newTypeC = 0
 
     private var lastTypedCount = 0
     private var elapsedTimeInSeconds = 0
+    private var highestTypingSpeed = 0 // 최고 타수 변수 추가
+    private var currentTypingSpeed = 0
+
+    private var typingSpeedJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,11 +93,16 @@ class KeyboardActivity : AppCompatActivity() {
     }
 
     private fun startTypingSpeedCalculator() {
-        GlobalScope.launch(Dispatchers.Main) {
+        typingSpeedJob = GlobalScope.launch(Dispatchers.Main) {
             while (isActive) {
                 delay(1000)
-                val currentTypingSpeed = (typedCharCount * 36) / elapsedTimeInSeconds
+                currentTypingSpeed = (typedCharCount * 36) / elapsedTimeInSeconds
                 binding.currentTyping.text = currentTypingSpeed.toString()
+
+                // 최고 타수 업데이트
+                if (currentTypingSpeed > highestTypingSpeed) {
+                    highestTypingSpeed = currentTypingSpeed
+                }
             }
         }
     }
@@ -117,9 +130,56 @@ class KeyboardActivity : AppCompatActivity() {
             currentWordTextView.text = wordList[currentWordIndex]
             결과창 코드는 여기에 삽입
             */
+            showResultDialog()
         }
 
     }
+
+    private fun showResultDialog() {
+        val resultView = LayoutInflater.from(this).inflate(R.layout.result_dialog_layout, null)
+        val builder = AlertDialog.Builder(this)
+            .setView(resultView)
+            .setCancelable(false)
+
+        typingSpeedJob?.cancel()
+
+        val resultDialog = builder.create()
+        resultDialog.show()
+
+        // 결과창에 값 설정
+        val goalTypingTextView: TextView = resultView.findViewById(R.id.goalTypingTextView)
+        goalTypingTextView.text = "-"
+
+        val averageTypingTextView: TextView = resultView.findViewById(R.id.averageTypingTextView)
+        averageTypingTextView.text = "${currentTypingSpeed} 타"
+
+        val highestTypingTextView: TextView = resultView.findViewById(R.id.highestTypingTextView)
+        highestTypingTextView.text = "${highestTypingSpeed} 타" // 여기에 최고 타수 변수 추가
+
+        val goalAccuracyTextView: TextView = resultView.findViewById(R.id.goalAccuracyTextView)
+        goalAccuracyTextView.text = "-"
+
+        val accuracyTextView: TextView = resultView.findViewById(R.id.accuracyTextView)
+        accuracyTextView.text = "${calculateAccuracy()}%"
+
+        val elapsedTimeTextView: TextView = resultView.findViewById(R.id.elapsedTimeTextView)
+        elapsedTimeTextView.text = "${formatElapsedTime()}"
+
+        // 다시하기 버튼
+        val restartButton: Button = resultView.findViewById(R.id.restartButton)
+        restartButton.setOnClickListener {
+            resultDialog.dismiss()
+            // 다시 시작하는 로직 추가
+        }
+
+        // 그만하기 버튼
+        val finishButton: Button = resultView.findViewById(R.id.finishButton)
+        finishButton.setOnClickListener {
+            resultDialog.dismiss()
+            // 액티비티 종료하는 로직 추가
+        }
+    }
+
     private fun shiftTextLeft() {
         // 1번째 TextView 초기화
         (binding.WordView.getChildAt(0) as TextView)?.text = ""
@@ -133,4 +193,17 @@ class KeyboardActivity : AppCompatActivity() {
         }
     }
 
+    private fun calculateAccuracy(): Int {
+        return if (typedCharCount > 0) {
+            (passedCount.toDouble() / wordList.size.toDouble() * 100).toInt()
+        } else {
+            0
+        }
+    }
+
+    private fun formatElapsedTime(): String {
+        val minutes = elapsedTimeInSeconds / 60
+        val seconds = elapsedTimeInSeconds % 60
+        return String.format("%02d:%02d", minutes, seconds)
+    }
 }

@@ -5,12 +5,18 @@ import android.os.Handler
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
+import android.text.format.DateUtils.formatElapsedTime
 import android.util.Log
+import android.view.LayoutInflater
+import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.typedu.databinding.ActivityWordBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -23,6 +29,7 @@ class WordActivity : AppCompatActivity() {
 
     private var isTyping = false
     private var highestTypingSpeed = 0
+    private var currentTypingSpeed = 0
 
     private var elapsedTimeInSeconds = 0
 
@@ -32,6 +39,8 @@ class WordActivity : AppCompatActivity() {
     private var totalTypedCount = 0
     private var totalCorrectCount = 0
     private var calcTypingSpeed = 0
+
+    private var typingSpeedJob : Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,7 +86,7 @@ class WordActivity : AppCompatActivity() {
         GlobalScope.launch(Dispatchers.Main) {
             while (isActive) {
                 delay(1000)
-                val currentTypingSpeed = calculateTypingSpeedPerSecond(calcTypingSpeed, elapsedTimeInSeconds)
+                currentTypingSpeed = calculateTypingSpeedPerSecond(calcTypingSpeed, elapsedTimeInSeconds)
                 binding.currentTyping.text = currentTypingSpeed.toString()
 
                 // 최고 타수 갱신
@@ -170,6 +179,52 @@ class WordActivity : AppCompatActivity() {
             currentWordIndex++
         } else {
             // 추가 작업이 필요한 경우 여기에 코드를 추가하세요.
+            showResultDialog()
+        }
+    }
+
+    private fun showResultDialog() {
+        val resultView = LayoutInflater.from(this).inflate(R.layout.result_dialog_layout, null)
+        val builder = AlertDialog.Builder(this)
+            .setView(resultView)
+            .setCancelable(false)
+
+        typingSpeedJob?.cancel()
+
+        val resultDialog = builder.create()
+        resultDialog.show()
+
+        // 결과창에 값 설정
+        val goalTypingTextView: TextView = resultView.findViewById(R.id.goalTypingTextView)
+        goalTypingTextView.text = "-"
+
+        val averageTypingTextView: TextView = resultView.findViewById(R.id.averageTypingTextView)
+        averageTypingTextView.text = "${currentTypingSpeed} 타"
+
+        val highestTypingTextView: TextView = resultView.findViewById(R.id.highestTypingTextView)
+        highestTypingTextView.text = "${highestTypingSpeed} 타" // 여기에 최고 타수 변수 추가
+
+        val goalAccuracyTextView: TextView = resultView.findViewById(R.id.goalAccuracyTextView)
+        goalAccuracyTextView.text = "-"
+
+        val accuracyTextView: TextView = resultView.findViewById(R.id.accuracyTextView)
+        accuracyTextView.text = "${calculateAccuracy()}%"
+
+        val elapsedTimeTextView: TextView = resultView.findViewById(R.id.elapsedTimeTextView)
+        elapsedTimeTextView.text = "${formatElapsedTime()}"
+
+        // 다시하기 버튼
+        val restartButton: Button = resultView.findViewById(R.id.restartButton)
+        restartButton.setOnClickListener {
+            resultDialog.dismiss()
+            // 다시 시작하는 로직 추가
+        }
+
+        // 그만하기 버튼
+        val finishButton: Button = resultView.findViewById(R.id.finishButton)
+        finishButton.setOnClickListener {
+            resultDialog.dismiss()
+            // 액티비티 종료하는 로직 추가
         }
     }
 
@@ -179,5 +234,11 @@ class WordActivity : AppCompatActivity() {
         } else {
             0
         }
+    }
+
+    private fun formatElapsedTime(): String {
+        val minutes = elapsedTimeInSeconds / 60
+        val seconds = elapsedTimeInSeconds % 60
+        return String.format("%02d:%02d", minutes, seconds)
     }
 }
