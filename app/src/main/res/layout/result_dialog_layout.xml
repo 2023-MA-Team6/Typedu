@@ -12,7 +12,7 @@
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="결과"
+        android:text="@string/reulst_dialog_result"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -28,14 +28,14 @@
             android:id="@+id/goalTypingLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="목표 타수"
+            android:text="@string/reulst_dialog_target_stroke"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/goalTypingTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="000 타"
+            android:text="000"
             android:textSize="16sp" />
 
     </LinearLayout>
@@ -50,14 +50,14 @@
             android:id="@+id/averageTypingLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="평균 타수:"
+            android:text="@string/reulst_dialog_average_stroke"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/averageTypingTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="000 타"
+            android:text="000"
             android:textSize="16sp" />
 
     </LinearLayout>
@@ -73,14 +73,14 @@
             android:id="@+id/highestTypingLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="최고 타수:"
+            android:text="@string/reulst_dialog_highest_stroke"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/highestTypingTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="000 타"
+            android:text="000"
             android:textSize="16sp" />
 
     </LinearLayout>
@@ -96,7 +96,7 @@
             android:id="@+id/goalAccuracyLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="목표 정확도:"
+            android:text="@string/reulst_dialog_target_accuracy"
             android:textSize="16sp" />
 
         <TextView
@@ -119,7 +119,7 @@
             android:id="@+id/accuracyLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="정확도:"
+            android:text="@string/reulst_dialog_accuracy"
             android:textSize="16sp" />
 
         <TextView
@@ -142,7 +142,7 @@
             android:id="@+id/elapsedTimeLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="소요 시간:"
+            android:text="@string/reulst_dialog_spend_time"
             android:textSize="16sp" />
 
         <TextView
@@ -167,7 +167,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="그만하기"
+            android:text="@string/reulst_dialog_stop"
             android:textSize="16sp" />
 
         <!-- 다시하기 버튼 -->
@@ -176,7 +176,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="다시하기"
+            android:text="@string/reulst_dialog_recall"
             android:textSize="16sp" />
 
     </LinearLayout>

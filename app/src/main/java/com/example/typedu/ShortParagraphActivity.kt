@@ -1,12 +1,10 @@
 package com.example.typedu
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
-import android.text.format.DateUtils.formatElapsedTime
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
@@ -214,6 +212,7 @@ class ShortParagraphActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showResultDialog() {
         val resultView = LayoutInflater.from(this).inflate(R.layout.result_dialog_layout, null)
         val builder = AlertDialog.Builder(this)
@@ -225,29 +224,32 @@ class ShortParagraphActivity : AppCompatActivity() {
         val resultDialog = builder.create()
         resultDialog.show()
 
+        val intent = intent
         // 결과창에 값 설정
         val goalTypingTextView: TextView = resultView.findViewById(R.id.goalTypingTextView)
-        goalTypingTextView.text = "-"
+        goalTypingTextView.text = ": ${intent.getStringExtra("ShortParagraphTargetScore")}"
 
         val averageTypingTextView: TextView = resultView.findViewById(R.id.averageTypingTextView)
-        averageTypingTextView.text = "${currentTypingSpeed} 타"
+        averageTypingTextView.text = ": ${currentTypingSpeed}${getString(R.string.ta)}"
 
         val highestTypingTextView: TextView = resultView.findViewById(R.id.highestTypingTextView)
-        highestTypingTextView.text = "${highestTypingSpeed} 타" // 여기에 최고 타수 변수 추가
+        highestTypingTextView.text = ": ${highestTypingSpeed}${getString(R.string.ta)}" // 여기에 최고 타수 변수 추가
 
         val goalAccuracyTextView: TextView = resultView.findViewById(R.id.goalAccuracyTextView)
-        goalAccuracyTextView.text = "-"
+        goalAccuracyTextView.text = ": ${intent.getStringExtra("ShortParagraphTargetAccuracy")}"
 
         val accuracyTextView: TextView = resultView.findViewById(R.id.accuracyTextView)
-        accuracyTextView.text = "${calculateAccuracy()}%"
+        accuracyTextView.text = ": ${calculateAccuracy()}%"
 
         val elapsedTimeTextView: TextView = resultView.findViewById(R.id.elapsedTimeTextView)
-        elapsedTimeTextView.text = "${formatElapsedTime()}"
+        elapsedTimeTextView.text = ": ${formatElapsedTime()}"
 
         // 다시하기 버튼
         val restartButton: Button = resultView.findViewById(R.id.restartButton)
         restartButton.setOnClickListener {
             resultDialog.dismiss()
+            val intent = Intent(this, ShortParagraphActivity::class.java)
+            startActivity(intent)
             // 다시 시작하는 로직 추가
         }
 
@@ -255,6 +257,8 @@ class ShortParagraphActivity : AppCompatActivity() {
         val finishButton: Button = resultView.findViewById(R.id.finishButton)
         finishButton.setOnClickListener {
             resultDialog.dismiss()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
             // 액티비티 종료하는 로직 추가
         }
     }

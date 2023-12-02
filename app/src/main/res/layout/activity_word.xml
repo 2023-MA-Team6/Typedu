@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="최고 타수:"/>
+            android:text="@string/word_layout_highest_stroke"/>
 
         <TextView
             android:id="@+id/highestTyping"
@@ -35,7 +35,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="현재 타수:"/>
+            android:text="@string/word_layout_current_stroke"/>
 
         <TextView
             android:id="@+id/currentTyping"
@@ -54,7 +54,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="정확도:"/>
+            android:text="@string/word_layout_accuracy"/>
 
         <TextView
             android:id="@+id/accuracy"
@@ -74,7 +74,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="입력할 단어"/>
+            android:text="@string/word_input_word"/>
 
         <TextView
             android:id="@+id/currentWord"
@@ -104,7 +104,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="다음 단어"/>
+            android:text="@string/word_layout_next_word"/>
 
         <TextView
             android:id="@+id/nextWord"

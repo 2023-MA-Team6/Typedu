@@ -1,8 +1,8 @@
 package com.example.typedu
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -14,7 +14,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.typedu.databinding.ActivityLongParagraphBinding
-import com.example.typedu.databinding.ActivityShortParagraphBinding
 import kotlinx.coroutines.*
 
 class LongParagraphActivity : AppCompatActivity() {
@@ -45,7 +44,10 @@ class LongParagraphActivity : AppCompatActivity() {
         setupEditText()
 
         // ScrollView 설정 - 파일 이름으로 리소스 동적으로 선택
-        setupScrollView("european_cheese")
+        val intent = intent
+        val txtHeader = intent.getStringExtra("selectedParagraph").toString()
+        Log.d("txtHeader", txtHeader)
+        setupScrollView(selectParagraph(txtHeader))
 
         // 다음 문장 표시
         showNextSentence()
@@ -226,6 +228,7 @@ class LongParagraphActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showResultDialog() {
         val resultView = LayoutInflater.from(this).inflate(R.layout.result_dialog_layout, null)
         val builder = AlertDialog.Builder(this)
@@ -238,28 +241,30 @@ class LongParagraphActivity : AppCompatActivity() {
         resultDialog.show()
 
         // 결과창에 값 설정
+        val intent = intent
         val goalTypingTextView: TextView = resultView.findViewById(R.id.goalTypingTextView)
-        goalTypingTextView.text = "-"
+        goalTypingTextView.text = ": ${intent.getStringExtra("LongParagraphTargetScore")}"
 
         val averageTypingTextView: TextView = resultView.findViewById(R.id.averageTypingTextView)
-        averageTypingTextView.text = "${currentTypingSpeed} 타"
+            averageTypingTextView.text = "${currentTypingSpeed}${getString(R.string.ta)}"
 
         val highestTypingTextView: TextView = resultView.findViewById(R.id.highestTypingTextView)
-        highestTypingTextView.text = "${highestTypingSpeed} 타" // 여기에 최고 타수 변수 추가
+        highestTypingTextView.text = "${highestTypingSpeed}${getString(R.string.ta)}" // 여기에 최고 타수 변수 추가
 
         val goalAccuracyTextView: TextView = resultView.findViewById(R.id.goalAccuracyTextView)
-        goalAccuracyTextView.text = "-"
+        goalAccuracyTextView.text = ": ${intent.getStringExtra("LongParagraphTargetAccuracy")}"
 
         val accuracyTextView: TextView = resultView.findViewById(R.id.accuracyTextView)
-        accuracyTextView.text = "${calculateAccuracy()}%"
+        accuracyTextView.text = ": ${calculateAccuracy()}%"
 
         val elapsedTimeTextView: TextView = resultView.findViewById(R.id.elapsedTimeTextView)
-        elapsedTimeTextView.text = "${formatElapsedTime()}"
+        elapsedTimeTextView.text = ": ${formatElapsedTime()}"
 
         // 다시하기 버튼
         val restartButton: Button = resultView.findViewById(R.id.restartButton)
         restartButton.setOnClickListener {
             resultDialog.dismiss()
+
             // 다시 시작하는 로직 추가
         }
 
@@ -267,7 +272,33 @@ class LongParagraphActivity : AppCompatActivity() {
         val finishButton: Button = resultView.findViewById(R.id.finishButton)
         finishButton.setOnClickListener {
             resultDialog.dismiss()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
             // 액티비티 종료하는 로직 추가
+        }
+    }
+
+    private fun selectParagraph(sentence: String) : String{
+        return when(sentence){
+            "별 헤는 밤" -> "ko_counting_the_starts_at_night"
+            "애국가" -> "ko_national_anthem"
+            "금도끼 은도끼" -> "ko_gold_ax_silver_ax"
+            "별주부전" -> "ko_tales_of_zara"
+            "어린왕자" -> "ko_le_petit_prince"
+            "님의 침묵" -> "ko_the_silence_of_love"
+            "愛を伝えたいだとか" -> "ja_ai_wo_tsutaetaidatoka"
+            "猫" -> "ja_neko"
+            "逆夢" -> "ja_sakayume"
+            "シャッタ" -> "ja_shutter"
+            "レオ" -> "ja_leo"
+            "ベテルギウス" -> "ja_betelgeuse"
+            "Bad" -> "en_bad"
+            "Dangerously" -> "en_dangerously"
+            "Snowman" -> "en_snowman"
+            "Toxic" -> "en_toxic"
+            "Wellerman" -> "en_wellerman"
+            "When i was your man" -> "en_when_i_was_your_man"
+            else -> "ko_the_silence_of_love"
         }
     }
 
@@ -278,4 +309,6 @@ class LongParagraphActivity : AppCompatActivity() {
             0
         }
     }
+
+
 }

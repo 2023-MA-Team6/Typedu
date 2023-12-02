@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="현재 타수:"/>
+            android:text="@string/keyboard_layout_current_stroke"/>
 
         <TextView
             android:id="@+id/currentTyping"
@@ -44,7 +44,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="입력한 글자 수:"/>
+            android:text="@string/keyboard_layout_number_of_characters_entered"/>
 
         <TextView
             android:id="@+id/typedChars"

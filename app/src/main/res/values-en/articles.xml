@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="article_title">
-        <item>Cinderella</item>
-        <item>Snow White</item>
-        <item>the little Prince</item>
-        <item>Rapunzel</item>
-        <item>Hong Gil-dong Story</item>
-        <item>robinson crusoe</item>
-        <item>Waiting for Godot</item>
+        <item>Bad</item>
+        <item>Dangerously</item>
+        <item>Snowman</item>
+        <item>Toxic</item>
+        <item>Wellerman</item>
+        <item>When i was your man</item>
     </string-array>
 </resources>

@@ -16,4 +16,31 @@
     <string name="popup_next">next</string>
     <string name="popup_cancel">cancel</string>
     <string name="popup_close">close</string>
+
+    <string name="keyboard_layout_current_stroke">Current strokes</string>
+    <string name="keyboard_layout_number_of_characters_entered">Number of characters entered</string>
+
+    <string name="short_long_paragraph_layout_progress_time">Progress time</string>
+    <string name="short_long_paragraph_layout_highest_stroke">Highest stroke</string>
+    <string name="short_long_paragraph_layout_current_stroke">Current stroke</string>
+    <string name="short_long_paragraph_layout_accuracy">Accuracy</string>
+
+    <string name="reulst_dialog_result">Result</string>
+    <string name="reulst_dialog_target_stroke">Target stroke</string>
+    <string name="reulst_dialog_average_stroke">Average stroke</string>
+    <string name="reulst_dialog_highest_stroke">Highest stroke</string>
+    <string name="reulst_dialog_target_accuracy">Target accuracy</string>
+    <string name="reulst_dialog_accuracy">Accuracy</string>
+    <string name="reulst_dialog_spend_time">Spend time</string>
+    <string name="reulst_dialog_stop">Stop</string>
+    <string name="reulst_dialog_recall">Recall</string>
+
+    <string name="word_layout_highest_stroke">Highest stroke</string>
+    <string name="word_layout_current_stroke">Current stroke</string>
+    <string name="word_input_word">Words to enter</string>
+    <string name="word_layout_accuracy">Accuracy</string>
+    <string name="word_layout_next_word">Next word</string>
+
+    <string name="ta">stroke</string>
+
 </resources>

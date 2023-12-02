@@ -1,5 +1,6 @@
 package com.example.typedu
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -217,13 +218,16 @@ class WordActivity : AppCompatActivity() {
         val restartButton: Button = resultView.findViewById(R.id.restartButton)
         restartButton.setOnClickListener {
             resultDialog.dismiss()
-            // 다시 시작하는 로직 추가
+            val intent = Intent(this, WordActivity::class.java)
+            startActivity(intent)
         }
 
         // 그만하기 버튼
         val finishButton: Button = resultView.findViewById(R.id.finishButton)
         finishButton.setOnClickListener {
             resultDialog.dismiss()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
             // 액티비티 종료하는 로직 추가
         }
     }

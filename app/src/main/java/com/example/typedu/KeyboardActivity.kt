@@ -1,5 +1,7 @@
 package com.example.typedu
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
@@ -135,6 +137,7 @@ class KeyboardActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showResultDialog() {
         val resultView = LayoutInflater.from(this).inflate(R.layout.result_dialog_layout, null)
         val builder = AlertDialog.Builder(this)
@@ -151,10 +154,10 @@ class KeyboardActivity : AppCompatActivity() {
         goalTypingTextView.text = "-"
 
         val averageTypingTextView: TextView = resultView.findViewById(R.id.averageTypingTextView)
-        averageTypingTextView.text = "${currentTypingSpeed} 타"
+        averageTypingTextView.text = "${currentTypingSpeed}${getString(R.string.ta)}"
 
         val highestTypingTextView: TextView = resultView.findViewById(R.id.highestTypingTextView)
-        highestTypingTextView.text = "${highestTypingSpeed} 타" // 여기에 최고 타수 변수 추가
+        highestTypingTextView.text = "${highestTypingSpeed}${getString(R.string.ta)}" // 여기에 최고 타수 변수 추가
 
         val goalAccuracyTextView: TextView = resultView.findViewById(R.id.goalAccuracyTextView)
         goalAccuracyTextView.text = "-"
@@ -163,11 +166,13 @@ class KeyboardActivity : AppCompatActivity() {
         accuracyTextView.text = "${calculateAccuracy()}%"
 
         val elapsedTimeTextView: TextView = resultView.findViewById(R.id.elapsedTimeTextView)
-        elapsedTimeTextView.text = "${formatElapsedTime()}"
+        elapsedTimeTextView.text = formatElapsedTime()
 
         // 다시하기 버튼
         val restartButton: Button = resultView.findViewById(R.id.restartButton)
         restartButton.setOnClickListener {
+            val intent = Intent(this, KeyboardActivity::class.java)
+            startActivity(intent)
             resultDialog.dismiss()
             // 다시 시작하는 로직 추가
         }
@@ -176,6 +181,8 @@ class KeyboardActivity : AppCompatActivity() {
         val finishButton: Button = resultView.findViewById(R.id.finishButton)
         finishButton.setOnClickListener {
             resultDialog.dismiss()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
             // 액티비티 종료하는 로직 추가
         }
     }
