@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="random_korean_words">
+        <item>無</item>
+        <item>敵</item>
+        <item>笑</item>
+        <item>顔</item>
+        <item>健</item>
+        <item>康</item>
+        <item>的</item>
+        <item>時</item>
+        <item>君</item>
+        <item>愛</item>
+        <item>少</item>
+        <item>浮</item>
+        <item>前</item>
+        <item>髪</item>
+        <item>目</item>
+        <item>玉</item>
+        <item>焼</item>
+        <item>今</item>
+        <item>日</item>
+        <item>馬</item>
+    </string-array>
+</resources>

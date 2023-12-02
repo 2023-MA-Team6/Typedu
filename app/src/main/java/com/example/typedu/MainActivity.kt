@@ -1,6 +1,7 @@
 package com.example.typedu
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -33,6 +34,8 @@ class MainActivity : AppCompatActivity() {
         // 자판 연습 버튼 클릭
         binding.keyPrBtn.setOnClickListener {
             Log.d("MainPage", "[메인] 자판 연습 버튼 클릭")
+            val intent = Intent(this, KeyboardActivity::class.java)
+            startActivity(intent)
         }
 
         // 낱말 연습 버튼 클릭

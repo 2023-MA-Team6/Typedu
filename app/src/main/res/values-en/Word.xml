@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="random_korean_verbs">
+        <item>say</item>
+        <item>Catch</item>
+        <item>play</item>
+        <item>wake up</item>
+        <item>run</item>
+        <item>laugh</item>
+        <item>cry</item>
+        <item>Think</item>
+        <item>Sit</item>
+        <item>Move</item>
+        <item>Walk</item>
+        <item>higher</item>
+        <item>jump</item>
+        <item>sweep</item>
+        <item>put</item>
+        <item>turn off</item>
+        <item>leave</item>
+        <item>meet</item>
+        <item>get off</item>
+        <item>close</item>
+    </string-array>
+</resources>

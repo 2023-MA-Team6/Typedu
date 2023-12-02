@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sentence_array">
+        <item>健康的な朝だな</item>
+        <item>こんな時に君の“愛してる”が聞きたいや</item>
+        <item>揺れるカーテン</item>
+        <item>少し浮いた前髪も すべて</item>
+        <item>心地いいさ</item>
+        <item>それに割れてしまった目玉焼き</item>
+        <item>ついてないなあ</item>
+        <item>バランスをとっても溢れちゃうや</item>
+        <item>少し辛くて 少し酸っぱくて</item>
+        <item>甘ったるかったりさ</item>
+        <item>とりあえず今日は</item>
+        <item>バラの花に願い込めてさ</item>
+        <item>馬鹿な夢で踊ろう</item>
+        <item>愛を伝えたいだとか</item>
+        <item>臭いことばっか考えて待ってても</item>
+        <item>だんだんソファに沈んでいくだけ</item>
+        <item>僕が明日良い男になるわけでもないからさ</item>
+        <item>焦らずにいるよ</item>
+        <item>今日は日が落ちる頃に会えるの？</item>
+        <item>“完璧な男になんて惹かれない”と</item>
+    </string-array>
+
+</resources>

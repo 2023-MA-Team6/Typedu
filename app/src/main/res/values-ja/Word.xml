@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="random_korean_verbs">
+        <item>言う</item>
+        <item>捕まえる</item>
+        <item>遊ぶ</item>
+        <item>起こる</item>
+        <item>走る</item>
+        <item>笑う</item>
+        <item>泣く</item>
+        <item>考える</item>
+        <item>座る</item>
+        <item>動く</item>
+        <item>歩く</item>
+        <item>高くなる</item>
+        <item>ジャンプする</item>
+        <item>書く</item>
+        <item>置く</item>
+        <item>オフ</item>
+        <item>去る</item>
+        <item>会う</item>
+        <item>落ちる</item>
+        <item>閉じる</item>
+    </string-array>
+</resources>
