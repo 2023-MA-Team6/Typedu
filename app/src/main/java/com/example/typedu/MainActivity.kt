@@ -19,6 +19,7 @@ import com.example.typedu.databinding.DialogSetTargetBinding
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
+    private var backPressedTime: Long = 0L
     private var targetScore:Int? = 0 // 목표 타수
     private var targetAccuracy:Int? = 0 // 목표 정확도
     private var article:Int = 0
@@ -211,5 +212,15 @@ class MainActivity : AppCompatActivity() {
         val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
         editor.putString("My_Lang", Lang)
         editor.apply()
+    }
+
+
+    override fun onBackPressed() {
+        if (System.currentTimeMillis() - backPressedTime <= 2000) {
+            finish()
+        } else {
+            backPressedTime = System.currentTimeMillis()
+            Toast.makeText(this, "한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+        }
     }
 }

@@ -3,14 +3,10 @@ package com.example.typedu
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
-import android.text.format.DateUtils.formatElapsedTime
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -181,8 +177,7 @@ class KeyboardActivity : AppCompatActivity() {
         val finishButton: Button = resultView.findViewById(R.id.finishButton)
         finishButton.setOnClickListener {
             resultDialog.dismiss()
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            finish()
             // 액티비티 종료하는 로직 추가
         }
     }

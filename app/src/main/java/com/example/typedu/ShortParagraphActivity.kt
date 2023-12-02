@@ -249,6 +249,8 @@ class ShortParagraphActivity : AppCompatActivity() {
         restartButton.setOnClickListener {
             resultDialog.dismiss()
             val intent = Intent(this, ShortParagraphActivity::class.java)
+            finish()
+
             startActivity(intent)
             // 다시 시작하는 로직 추가
         }
@@ -257,8 +259,7 @@ class ShortParagraphActivity : AppCompatActivity() {
         val finishButton: Button = resultView.findViewById(R.id.finishButton)
         finishButton.setOnClickListener {
             resultDialog.dismiss()
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            finish()
             // 액티비티 종료하는 로직 추가
         }
     }

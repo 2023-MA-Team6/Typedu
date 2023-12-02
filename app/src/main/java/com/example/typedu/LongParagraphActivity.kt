@@ -18,6 +18,10 @@ import kotlinx.coroutines.*
 
 class LongParagraphActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLongParagraphBinding
+    private var txtHeader = ""
+    private var targetScore = ""
+    private var targetAccuracy = ""
+
     private var currentSentenceIndex = 0
     private var typedCharCount = 0
     private var correctCharCount = 0
@@ -45,7 +49,7 @@ class LongParagraphActivity : AppCompatActivity() {
 
         // ScrollView 설정 - 파일 이름으로 리소스 동적으로 선택
         val intent = intent
-        val txtHeader = intent.getStringExtra("selectedParagraph").toString()
+        txtHeader = intent.getStringExtra("selectedParagraph").toString()
         Log.d("txtHeader", txtHeader)
         setupScrollView(selectParagraph(txtHeader))
 
@@ -243,16 +247,18 @@ class LongParagraphActivity : AppCompatActivity() {
         // 결과창에 값 설정
         val intent = intent
         val goalTypingTextView: TextView = resultView.findViewById(R.id.goalTypingTextView)
-        goalTypingTextView.text = ": ${intent.getStringExtra("LongParagraphTargetScore")}"
+        targetScore = intent.getStringExtra("LongParagraphTargetScore").toString()
+        goalTypingTextView.text = ": ${targetScore}"
 
         val averageTypingTextView: TextView = resultView.findViewById(R.id.averageTypingTextView)
-            averageTypingTextView.text = "${currentTypingSpeed}${getString(R.string.ta)}"
+            averageTypingTextView.text = ": ${currentTypingSpeed}${getString(R.string.ta)}"
 
         val highestTypingTextView: TextView = resultView.findViewById(R.id.highestTypingTextView)
-        highestTypingTextView.text = "${highestTypingSpeed}${getString(R.string.ta)}" // 여기에 최고 타수 변수 추가
+        highestTypingTextView.text = ": ${highestTypingSpeed}${getString(R.string.ta)}" // 여기에 최고 타수 변수 추가
 
         val goalAccuracyTextView: TextView = resultView.findViewById(R.id.goalAccuracyTextView)
-        goalAccuracyTextView.text = ": ${intent.getStringExtra("LongParagraphTargetAccuracy")}"
+        targetAccuracy = intent.getStringExtra("LongParagraphTargetAccuracy").toString()
+        goalAccuracyTextView.text = ": ${targetAccuracy}"
 
         val accuracyTextView: TextView = resultView.findViewById(R.id.accuracyTextView)
         accuracyTextView.text = ": ${calculateAccuracy()}%"
@@ -265,6 +271,13 @@ class LongParagraphActivity : AppCompatActivity() {
         restartButton.setOnClickListener {
             resultDialog.dismiss()
 
+            val intent = Intent(this, LongParagraphActivity::class.java)
+            Log.d("txtHeader", txtHeader)
+            intent.putExtra("selectedParagraph",txtHeader)
+            intent.putExtra("LongParagraphTargetScore", targetScore)
+            intent.putExtra("LongParagraphTargetAccuracy", targetAccuracy)
+            finish()
+            startActivity(intent)
             // 다시 시작하는 로직 추가
         }
 
@@ -272,8 +285,7 @@ class LongParagraphActivity : AppCompatActivity() {
         val finishButton: Button = resultView.findViewById(R.id.finishButton)
         finishButton.setOnClickListener {
             resultDialog.dismiss()
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            finish()
             // 액티비티 종료하는 로직 추가
         }
     }
@@ -298,6 +310,7 @@ class LongParagraphActivity : AppCompatActivity() {
             "Toxic" -> "en_toxic"
             "Wellerman" -> "en_wellerman"
             "When i was your man" -> "en_when_i_was_your_man"
+            "test"->"test"
             else -> "ko_the_silence_of_love"
         }
     }
