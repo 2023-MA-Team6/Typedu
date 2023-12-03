@@ -195,10 +195,10 @@ class WordActivity : AppCompatActivity() {
         goalTypingTextView.text = "-"
 
         val averageTypingTextView: TextView = resultView.findViewById(R.id.averageTypingTextView)
-        averageTypingTextView.text = "${currentTypingSpeed} 타"
+        averageTypingTextView.text = "${currentTypingSpeed}"
 
         val highestTypingTextView: TextView = resultView.findViewById(R.id.highestTypingTextView)
-        highestTypingTextView.text = "${highestTypingSpeed} 타" // 여기에 최고 타수 변수 추가
+        highestTypingTextView.text = "${highestTypingSpeed}" // 여기에 최고 타수 변수 추가
 
         val goalAccuracyTextView: TextView = resultView.findViewById(R.id.goalAccuracyTextView)
         goalAccuracyTextView.text = "-"
