@@ -97,40 +97,42 @@
 
 
     <!-- 입력할 현재 단어 표시 -->
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/currentWordLayout"
         android:layout_width="wrap_content"
         android:minWidth="280dp"
         android:layout_height="120dp"
         android:layout_gravity="center"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="10dp"
-        android:paddingTop="5dp"
-        android:paddingHorizontal="5dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        style="@style/TypingNow">
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        style="@style/TypingWord">
 
         <TextView
+            android:id="@+id/inputWord"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans_kr_semi_bold"
             android:includeFontPadding="false"
             android:textColor="@color/white"
+            android:layout_marginTop="5dp"
             android:textSize="22sp"
+            android:layout_centerHorizontal="true"
             android:text="@string/word_input_word"/>
+
 
         <TextView
             android:id="@+id/currentWord"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:fontFamily="@font/noto_sans_kr_semi_bold"
+            android:layout_alignParentBottom="true"
             android:includeFontPadding="false"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            android:text="test"
             android:textColor="@color/typeedu_brown"
-            android:text=""
             android:textSize="52sp" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <!-- 입력란 -->
     <EditText
@@ -139,13 +141,11 @@
         android:minWidth="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:padding="10dp"
         android:background="@drawable/shape_typing_inputbox"
         android:textCursorDrawable="@drawable/shape_typing_cursor"
         android:fontFamily="@font/noto_sans_kr_regular"
         android:includeFontPadding="false"
-        android:textSize="52sp"
+        android:textSize="32sp"
         android:textColor="@color/black"
         android:textAlignment="center"/>
 
@@ -155,7 +155,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="10dp">
 
         <TextView
             android:layout_width="wrap_content"
