@@ -1,12 +1,8 @@
 package com.example.typedu
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
-import android.text.format.DateUtils.formatElapsedTime
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
@@ -40,6 +36,9 @@ class ShortParagraphActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityShortParagraphBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         // EditText 설정
         setupEditText()
@@ -108,12 +107,20 @@ class ShortParagraphActivity : AppCompatActivity() {
     private fun setupScrollView() {
         val scrollView: LinearLayout = findViewById(R.id.contentScrollView)
         val sentenceArray: Array<String> = resources.getStringArray(R.array.sentence_array)
+        val layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+
+        val dp5 = (5 * resources.displayMetrics.density + 0.5f).toInt()
+        layoutParams.setMargins(0, dp5, 0, dp5)
 
         for (sentence in sentenceArray) {
-            val textView = TextView(this)
+            val myView = LayoutInflater.from(this).inflate(R.layout.scrollview_short_paragraph_list, null)
+
+            val textView = myView.rootView as TextView
             textView.text = sentence
-            textView.textSize = 20f
-            scrollView.addView(textView)
+            scrollView.addView(textView, layoutParams)
         }
         MAX_ITEM_COUNT = scrollView.childCount
     }
@@ -265,5 +272,10 @@ class ShortParagraphActivity : AppCompatActivity() {
         } else {
             0
         }
+    }
+
+    // ActionBar 뒤로가기 추가
+    override fun onSupportNavigateUp(): Boolean {
+        return super.onSupportNavigateUp()
     }
 }

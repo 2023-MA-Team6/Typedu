@@ -35,10 +35,14 @@ class KeyboardActivity : AppCompatActivity() {
 
     private var typingSpeedJob: Job? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityKeyboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         wordList = resources.getStringArray(R.array.random_korean_words).toList()
 
@@ -55,7 +59,7 @@ class KeyboardActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                val currentWordView = binding.WordView.getChildAt(2) as? TextView
+                val currentWordView = binding.letter3rd as? TextView
                 val currentWord = currentWordView?.text.toString()
                 val currentEditText = binding.currentWordText.text.toString()
                 typedCharCount++
@@ -108,9 +112,9 @@ class KeyboardActivity : AppCompatActivity() {
     }
 
     private fun showNextWord() {
-        val currentWordTextView = binding.WordView.getChildAt(2) as TextView
-        val nextWordTextView = binding.WordView.getChildAt(3) as TextView
-        val thirdWordTextView = binding.WordView.getChildAt(4) as TextView
+        val currentWordTextView = binding.letter3rd as TextView
+        val nextWordTextView = binding.letter4th as TextView
+        val thirdWordTextView = binding.letter5th as TextView
 
         if (currentWordIndex < wordList.size) {
             currentWordTextView.text = wordList[currentWordIndex]
@@ -182,15 +186,11 @@ class KeyboardActivity : AppCompatActivity() {
 
     private fun shiftTextLeft() {
         // 1번째 TextView 초기화
-        (binding.WordView.getChildAt(0) as TextView)?.text = ""
+        (binding.letter1st as TextView)?.text = ""
 
         // 2번째와 3번째 TextView의 값 이동
-        for (i in 0..1) {
-            val currentWordTextView = binding.WordView.getChildAt(i + 1) as? TextView
-            val previousWordTextView = binding.WordView.getChildAt(i) as? TextView
-
-            previousWordTextView?.text = currentWordTextView?.text
-        }
+        binding.letter1st.text = binding.letter2nd.text
+        binding.letter2nd.text = binding.letter3rd.text
     }
 
     private fun calculateAccuracy(): Int {
@@ -206,4 +206,10 @@ class KeyboardActivity : AppCompatActivity() {
         val seconds = elapsedTimeInSeconds % 60
         return String.format("%02d:%02d", minutes, seconds)
     }
+
+    // ActionBar 뒤로가기 추가
+    override fun onSupportNavigateUp(): Boolean {
+        return super.onSupportNavigateUp()
+    }
+
 }
