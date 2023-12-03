@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-<!--아이템이 활성화 상태일 때 글자색을 흰색-->
     <item android:state_activated="true"
         android:color="@android:color/white"/>
-<!--아이템이 눌러졌을 때 글자색을 흰색-->
     <item android:state_pressed="true"
         android:color="@android:color/white"/>
-<!--이외의 글자 색상은 검정-->
     <item android:color="@android:color/black"/>
 </selector>

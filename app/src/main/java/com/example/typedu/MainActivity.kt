@@ -19,6 +19,7 @@ import com.example.typedu.databinding.DialogSetTargetBinding
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
+    private var selectedLanguage = "한국어"
     private var backPressedTime: Long = 0L
     private var targetScore:Int? = 0 // 목표 타수
     private var targetAccuracy:Int? = 0 // 목표 정확도
@@ -151,7 +152,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("MainPage_Article_Dialog", "[메인_긴글] 선택한 글: $article")
 
             if(article == -1) // 글 선택하지 않을 시
-                Toast.makeText(this, "글을 선택하거나 업로드해주세요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.article_dialog_not_selected, Toast.LENGTH_SHORT).show()
             else { // 다음 다이얼로그 (목표 설정)
                 alertDialog.dismiss()
 
@@ -176,21 +177,22 @@ class MainActivity : AppCompatActivity() {
             .setView(setLanguageSetDialog.root)
             .create()
         setLanguageSetDialog.cancelBtn.setOnClickListener {
+            when (selectedLanguage){
+                "한국어" -> setLocate("ko-rKR")
+                "English" -> {
+                    setLocate("en")
+                }
+                "日本語" -> setLocate("ja")
+            }
             alertDialog.dismiss()
             recreate()
         }
 
         setLanguageSetDialog.languageSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
-                val selectedLanguage = setLanguageSetDialog.languageSpinner.selectedItem as String
+                selectedLanguage = setLanguageSetDialog.languageSpinner.selectedItem as String
                 Log.d("언어", selectedLanguage)
-                when (selectedLanguage){
-                    "한국어" -> setLocate("ko-rKR")
-                    "English" -> {
-                        setLocate("en")
-                    }
-                    "日本語" -> setLocate("ja")
-                }
+
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
@@ -220,7 +222,7 @@ class MainActivity : AppCompatActivity() {
             finish()
         } else {
             backPressedTime = System.currentTimeMillis()
-            Toast.makeText(this, "한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.main_go_back, Toast.LENGTH_SHORT).show()
         }
     }
 }
