@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity() {
     private var selectedParagraph : String = "null"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("MainPage", "start")
+
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
