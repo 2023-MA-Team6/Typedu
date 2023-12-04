@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="typeedu_orange">#F8AE69</color>
+    <color name="typeedu_grey">#747775</color>
+    <color name="typeedu_blue">#6979F8</color>
+    <color name="typeedu_brown">#934700</color>
+    <color name="typeedu_lightgrey">#ABABAB</color>
+    <color name="typeedu_lightorange">#FFDAA2</color>
 </resources>
