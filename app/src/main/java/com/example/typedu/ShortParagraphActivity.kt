@@ -2,9 +2,13 @@ package com.example.typedu
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
+import android.text.Spannable
+import android.text.SpannableString
 import android.text.TextWatcher
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
@@ -163,6 +167,8 @@ class ShortParagraphActivity : AppCompatActivity() {
     private var index: Int = 0
     private var tempTypingCount = 0
     private fun checkTypingAccuracy(sentence: String, userText: String) {
+        val spannableString = SpannableString(sentence)
+
         if(sentence == userText) {
             index = 0
             totalTypedCount += typedCharCount
@@ -209,6 +215,28 @@ class ShortParagraphActivity : AppCompatActivity() {
                         correctCharCount++
                 }
             }
+            for(i in 0 until sentence.length)  {
+                if(i < userText.length) {
+                    if(sentence[i] != userText[i]) {
+                        //틀린 글자는 빨강으로
+                        spannableString.setSpan(
+                            ForegroundColorSpan(Color.RED),
+                            i,
+                            i + 1,
+                            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                        )
+                    } else {
+                        // 맞는 글자는 파랑으로
+                        spannableString.setSpan(
+                            ForegroundColorSpan(Color.BLUE),
+                            i,
+                            i + 1,
+                            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                        )
+                    }
+                }
+            }
+            binding.currentStatement.text = spannableString
         }
     }
 
