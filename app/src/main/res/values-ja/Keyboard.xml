@@ -1,25 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="random_korean_words">
-        <item>無</item>
-        <item>敵</item>
-        <item>笑</item>
-        <item>顔</item>
-        <item>健</item>
-        <item>康</item>
-        <item>的</item>
-        <item>時</item>
-        <item>君</item>
-        <item>愛</item>
-        <item>少</item>
-        <item>浮</item>
-        <item>前</item>
-        <item>髪</item>
-        <item>目</item>
-        <item>玉</item>
-        <item>焼</item>
-        <item>今</item>
-        <item>日</item>
-        <item>馬</item>
+    <string-array name="keyboard_arr">
+        <item>む</item>
+        <item>て</item>
+        <item>わ</item>
+        <item>か</item>
+        <item>け</item>
+        <item>と</item>
+        <item>き</item>
+        <item>あ</item>
+        <item>し</item>
+        <item>う</item>
+        <item>ま</item>
+        <item>め</item>
+        <item>た</item>
+        <item>や</item>
+        <item>き</item>
+        <item>び</item>
+        <item>ぬ</item>
+        <item>ほ</item>
+        <item>よ</item>
+        <item>り</item>
+        <item>ん</item>
+        <item>も</item>
+        <item>く</item>
+        <item>ら</item>
+        <item>に</item>
+        <item>け</item>
+        <item>さ</item>
+        <item>す</item>
+        <item>く</item>
+        <item>り</item>
+        <item>な</item>
+        <item>せ</item>
+        <item>お</item>
+        <item>ん</item>
+        <item>あ</item>
+        <item>ひ</item>
+        <item>は</item>
+        <item>き</item>
+        <item>ふ</item>
+        <item>へ</item>
+        <item>ほ</item>
+        <item>ら</item>
+        <item>う</item>
+        <item>ち</item>
+        <item>つ</item>
+        <item>て</item>
+        <item>と</item>
+        <item>り</item>
+        <item>る</item>
+        <item>れ</item>
     </string-array>
 </resources>

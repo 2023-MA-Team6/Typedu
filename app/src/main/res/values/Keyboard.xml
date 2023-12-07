@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="random_korean_words">
+    <string-array name="keyboard_arr">
         <item>낳</item>
         <item>앟</item>
         <item>궭</item>
@@ -21,5 +21,35 @@
         <item>퀄</item>
         <item>척</item>
         <item>럼</item>
+        <item>가</item>
+        <item>너</item>
+        <item>도</item>
+        <item>김</item>
+        <item>지</item>
+        <item>물</item>
+        <item>컴</item>
+        <item>퓨</item>
+        <item>터</item>
+        <item>과</item>
+        <item>학</item>
+        <item>문</item>
+        <item>체</item>
+        <item>실</item>
+        <item>화</item>
+        <item>봄</item>
+        <item>여</item>
+        <item>름</item>
+        <item>집</item>
+        <item>마</item>
+        <item>자</item>
+        <item>석</item>
+        <item>커</item>
+        <item>사</item>
+        <item>랑</item>
+        <item>강</item>
+        <item>난</item>
+        <item>코</item>
+        <item>딩</item>
+        <item>뷰</item>
     </string-array>
 </resources>

@@ -113,7 +113,7 @@ class ShortParagraphActivity : AppCompatActivity() {
 
     private fun setupScrollView() {
         val scrollView: LinearLayout = findViewById(R.id.contentScrollView)
-        val sentenceArray: Array<String> = resources.getStringArray(R.array.sentence_array)
+        val sentenceArray: Array<String> = resources.getStringArray(R.array.statement_array)
         val layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT

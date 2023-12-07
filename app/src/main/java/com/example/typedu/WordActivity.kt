@@ -50,7 +50,7 @@ class WordActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        wordList = resources.getStringArray(R.array.random_korean_verbs).toList()
+        wordList = resources.getStringArray(R.array.word_arr).toList()
 
         // 초기화면에 첫 번째 단어 표시
         showNextWord()
