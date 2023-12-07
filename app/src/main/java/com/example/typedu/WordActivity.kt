@@ -8,7 +8,6 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextWatcher
 import android.text.style.ForegroundColorSpan
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.TextView
@@ -47,6 +46,9 @@ class WordActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWordBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         wordList = resources.getStringArray(R.array.random_korean_verbs).toList()
 
@@ -271,4 +273,11 @@ class WordActivity : AppCompatActivity() {
         val seconds = elapsedTimeInSeconds % 60
         return String.format("%02d:%02d", minutes, seconds)
     }
+
+    // ActionBar 뒤로가기 추가
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 }
+

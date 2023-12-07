@@ -105,7 +105,10 @@ class LongParagraphActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {
                 val currentSentence = binding.currentStatement.text.toString()
+                Log.d("test1", currentSentence)
                 val currentEditText = binding.currentWordText.text.toString()
+                Log.d("test1", currentEditText)
+
 
                 // 글자 일치 여부 확인
                 checkTypingAccuracy(currentSentence, currentEditText)
@@ -121,6 +124,13 @@ class LongParagraphActivity : AppCompatActivity() {
 
     private fun setupScrollView(resourceName: String) {
         val scrollView: LinearLayout = findViewById(R.id.contentScrollView)
+        val layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+
+        val dp5 = (5 * resources.displayMetrics.density + 0.5f).toInt()
+        layoutParams.setMargins(0, dp5, 0, dp5)
 
         // 파일 이름을 기반으로 리소스 ID 가져오기
         val resourceId = resources.getIdentifier(resourceName, "raw", packageName)
@@ -135,10 +145,13 @@ class LongParagraphActivity : AppCompatActivity() {
         // 텍스트를 문장 단위로 나누어 ScrollView에 추가하기
         val sentenceArray = text.split("\r\n").toTypedArray()
         for (sentence in sentenceArray) {
-            val textView = TextView(this)
+            val myView = LayoutInflater.from(this).inflate(R.layout.scrollview_long_paragraph_list, null)
+
+            val textView = myView.findViewById(R.id.long_sentence) as TextView
             textView.text = sentence
-            textView.textSize = 20f
-            scrollView.addView(textView)
+            Log.d("test", sentence)
+            // 여기서 LinearLayout이 들어간다.
+            scrollView.addView(myView, layoutParams)
         }
         MAX_ITEM_COUNT = scrollView.childCount
     }
@@ -150,10 +163,19 @@ class LongParagraphActivity : AppCompatActivity() {
         val currentStatementView: TextView = findViewById(R.id.currentStatement)
 
         if (currentSentenceIndex < MAX_ITEM_COUNT) {
-            val currentSentenceTextView = scrollView.getChildAt(0) as? TextView
+            //contentScrollView에는 LinearLayout들이 들어가있다.
+            val childLayout = scrollView.getChildAt(0) as? LinearLayout
+            //LinearLayout의 첫 번째 요소
+            val currentSentenceTextView = childLayout?.getChildAt(0) as? TextView
+
+//            Log.d("test", currentSentenceTextView?.text.toString())
+
             val currentSentence = currentSentenceTextView?.text.toString()
             currentStatementView.text = currentSentence
+
+            // contentView의 LinearLayout 자체를 삭제
             scrollView.removeViewAt(0)
+
             currentSentenceIndex++
         } else {
             // 추가 작업이 필요한 경우 여기에 코드를 추가하세요.
@@ -356,7 +378,8 @@ class LongParagraphActivity : AppCompatActivity() {
 
     // ActionBar 뒤로가기 추가
     override fun onSupportNavigateUp(): Boolean {
-        return super.onSupportNavigateUp()
+        onBackPressed()
+        return true
     }
 
 }

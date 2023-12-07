@@ -212,7 +212,9 @@ class KeyboardActivity : AppCompatActivity() {
         val seconds = elapsedTimeInSeconds % 60
         return String.format("%02d:%02d", minutes, seconds)
     }
+    // ActionBar 뒤로가기 추가
     override fun onSupportNavigateUp(): Boolean {
-        return super.onSupportNavigateUp()
+        onBackPressed()
+        return true
     }
 }
