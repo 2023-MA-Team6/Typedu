@@ -14,11 +14,6 @@
         <item>ま</item>
         <item>め</item>
         <item>た</item>
-        <item>や</item>
-        <item>き</item>
-        <item>び</item>
-        <item>ぬ</item>
-        <item>ほ</item>
         <item>よ</item>
         <item>り</item>
         <item>ん</item>
@@ -27,29 +22,34 @@
         <item>ら</item>
         <item>に</item>
         <item>け</item>
-        <item>さ</item>
-        <item>す</item>
-        <item>く</item>
-        <item>り</item>
-        <item>な</item>
-        <item>せ</item>
-        <item>お</item>
-        <item>ん</item>
-        <item>あ</item>
-        <item>ひ</item>
-        <item>は</item>
-        <item>き</item>
         <item>ふ</item>
         <item>へ</item>
+        <item>ア</item>
+        <item>イ</item>
+        <item>ウ</item>
+        <item>エ</item>
+        <item>オ</item>
+        <item>ガ</item>
+        <item>ギ</item>
+        <item>グ</item>
+        <item>ゲ</item>
+        <item>ゴ</item>
+        <item>サ</item>
+        <item>シ</item>
+        <item>ス</item>
+        <item>セ</item>
+        <item>ソ</item>
+        <item>ザ</item>
+        <item>ジ</item>
+        <item>ズ</item>
+        <item>ネ</item>
+        <item>レ</item>
+        <item>ロ</item>
+        <item>ワ</item>
+        <item>ヰ</item>
+        <item>ヲ</item>
+        <item>ン</item>
         <item>ほ</item>
-        <item>ら</item>
-        <item>う</item>
-        <item>ち</item>
-        <item>つ</item>
-        <item>て</item>
-        <item>と</item>
-        <item>り</item>
-        <item>る</item>
         <item>れ</item>
     </string-array>
 </resources>
