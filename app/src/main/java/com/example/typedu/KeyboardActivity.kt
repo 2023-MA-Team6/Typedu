@@ -37,6 +37,10 @@ class KeyboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityKeyboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
 
         wordList = resources.getStringArray(R.array.random_korean_words).toList()
 
@@ -207,5 +211,8 @@ class KeyboardActivity : AppCompatActivity() {
         val minutes = elapsedTimeInSeconds / 60
         val seconds = elapsedTimeInSeconds % 60
         return String.format("%02d:%02d", minutes, seconds)
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        return super.onSupportNavigateUp()
     }
 }

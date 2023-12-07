@@ -47,6 +47,10 @@ class LongParagraphActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLongParagraphBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
 
         // EditText 설정
         setupEditText()
@@ -350,5 +354,9 @@ class LongParagraphActivity : AppCompatActivity() {
         }
     }
 
+    // ActionBar 뒤로가기 추가
+    override fun onSupportNavigateUp(): Boolean {
+        return super.onSupportNavigateUp()
+    }
 
 }
