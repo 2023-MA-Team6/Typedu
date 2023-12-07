@@ -13,20 +13,7 @@
         android:theme="@style/Theme.Typedu"
         tools:targetApi="31">
         <activity
-            android:name=".KeyboardActivity"
-            android:exported="false" />
-        <activity
-            android:name=".WordActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LongParagraphActivity"
-            android:exported="false" />
-        <activity
-            android:name="MainActivity"
-            android:exported="false" />
-        <!--.MainActivity -->
-        <activity
-            android:name=".ShortParagraphActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
