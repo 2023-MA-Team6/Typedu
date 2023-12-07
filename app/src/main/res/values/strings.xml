@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">Typedu</string>
+    <string name="main_menu1_name">자판 연습</string>
+    <string name="main_menu2_name">낱말 연습</string>
+    <string name="main_menu3_name">짧은 글 연습</string>
+    <string name="main_menu4_name">긴 글 연습</string>
+    <string name="main_setting">언어 설정</string>
+    <string name="popup_articleselect_title">긴 글 선택</string>
+    <string name="popup_articleselect_load">새 글 불러오기</string>
+    <string name="popup_languageset_title">언어 설정</string>
+    <string name="popup_targetset_title">목표 설정</string>
+    <string name="popup_targetset_targetspeed">목표 타수</string>
+    <string name="popup_targetset_targetaccuracy">목표 정확도</string>
+    <string name="popup_result_title">결과</string>
+    <string name="popup_result_exit">그만하기</string>
+    <string name="popup_result_retry">다시하기</string>
+    <string name="popup_start">시작</string>
+    <string name="popup_next">다음</string>
+    <string name="popup_cancel">취소</string>
+    <string name="popup_close">닫기</string>
+    <string name="typing_currentspeed">현재 타수</string>
+    <string name="typing_record">입력한 글자 수</string>
+    <string name="typing_bestspeed">최고 타수</string>
+    <string name="typing_accuracy">정확도</string>
+    <string name="typing_time">진행 시간</string>
+    <string name="typing_target_accuracy">목표 정확도</string>
+    <string name="typing_target_speed">목표 타수</string>
+    <string name="typing_speed">타수</string>
+    <string name="typing_totaltime">소요 시간</string>
+    <string name="typing_keyboard_currentletter">입력할 글자</string>
+    <string name="typing_word_currentword">입력할 단어</string>
+    <string name="typing_word_nextword">다음 단어</string>
 </resources>
