@@ -27,8 +27,6 @@ class LongParagraphActivity : AppCompatActivity() {
     private var targetAccuracy = ""
 
     private var currentSentenceIndex = 0
-    private var typedCharCount = 0
-    private var correctCharCount = 0
 
     private var totalTypedCount = 0
     private var totalCorrectCount = 0
@@ -210,55 +208,53 @@ class LongParagraphActivity : AppCompatActivity() {
         }
     }
 
-    var index: Int = 0
-    var tempTypingCount = 0
+    private var index: Int = 0
+    private var tempTypingCount = 0
     private fun checkTypingAccuracy(sentence: String, userText: String) {
         val spannableString = SpannableString(sentence)
+
         if(sentence == userText) {
-            index = 0
+            var typedCharCount = index
+            var correctCharCount = 0
+
+            for(i in 0 until index) {
+                if(sentence[i] == userText[i])
+                    correctCharCount++
+            }
+
             totalTypedCount += typedCharCount
             totalCorrectCount += correctCharCount
-            typedCharCount = 0
-            correctCharCount = 0
+            index = 0
+
             showNextSentence()
             binding.currentWordText.setText("")
             calcTypingSpeed++
         } else if(sentence.length < userText.length) {
-            if(sentence[index] == userText[index])
-                correctCharCount++
-            typedCharCount++
+            var typedCharCount = index
+            var correctCharCount = 0
+
+            for(i in 0 until index) {
+                if(sentence[i] == userText[i])
+                    correctCharCount++
+            }
+
+            totalTypedCount += typedCharCount + 1
+            totalCorrectCount += correctCharCount
             index = 0
 
-            totalTypedCount += typedCharCount
-            totalCorrectCount += correctCharCount
-            typedCharCount = 0
-            correctCharCount = 0
             showNextSentence()
             binding.currentWordText.setText("")
             calcTypingSpeed++
         } else {
             tempTypingCount++
             if(index < userText.length -1) {
-
-                if(sentence[index] == userText[index]) {
-                    correctCharCount++
-                    typedCharCount++
-                } else {
-                    typedCharCount++
-                }
                 index++
                 calcTypingSpeed += tempTypingCount
                 tempTypingCount = 0
             } else if(index > userText.length - 1 && userText.length - 1 >= 0) {
-                typedCharCount--
                 index--
 
-                correctCharCount = 0
                 tempTypingCount = 0
-                for(i in 0 until index) {
-                    if(sentence[i] == userText[i])
-                        correctCharCount++
-                }
             }
             for(i in 0 until sentence.length)  {
                 if(i < userText.length) {

@@ -31,6 +31,8 @@ class KeyboardActivity : AppCompatActivity() {
     private var highestTypingSpeed = 0 // 최고 타수 변수 추가
     private var currentTypingSpeed = 0
 
+    private val MAX_ITEM_COUNT = 20
+
     private var typingSpeedJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +45,7 @@ class KeyboardActivity : AppCompatActivity() {
 
 
         wordList = resources.getStringArray(R.array.keyboard_arr).toList()
-
+        wordList = wordList.shuffled().take(MAX_ITEM_COUNT)
         // 초기화면에 첫 번째 단어 표시
         showNextWord()
 

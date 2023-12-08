@@ -20,6 +20,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import java.util.Collections
 
 class WordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWordBinding
@@ -33,12 +34,11 @@ class WordActivity : AppCompatActivity() {
 
     private var elapsedTimeInSeconds = 0
 
-    private var typedCharCount = 0
-    private var correctCharCount = 0
-
     private var totalTypedCount = 0
     private var totalCorrectCount = 0
     private var calcTypingSpeed = 0
+
+    private val MAX_ITEM_COUNT = 20
 
     private var typingSpeedJob : Job? = null
 
@@ -51,6 +51,7 @@ class WordActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         wordList = resources.getStringArray(R.array.word_arr).toList()
+        wordList = wordList.shuffled().take(MAX_ITEM_COUNT)
 
         // 초기화면에 첫 번째 단어 표시
         showNextWord()
@@ -118,56 +119,48 @@ class WordActivity : AppCompatActivity() {
         val spannableString = SpannableString(sentence)
 
         if(sentence == userText) {
-            index = 0
+            var typedCharCount = index
+            var correctCharCount = 0
+
+            for(i in 0 until index) {
+                if(sentence[i] == userText[i])
+                    correctCharCount++
+            }
+
             totalTypedCount += typedCharCount
             totalCorrectCount += correctCharCount
-            typedCharCount = 0
-            correctCharCount = 0
+            index = 0
 
             showNextWord()
-
-            correctWordCount++
-            calcTypingSpeed++
             binding.currentWordText.setText("")
+            calcTypingSpeed++
         } else if(sentence.length < userText.length) {
-            if(sentence[index] == userText[index])
-                correctCharCount++
-            typedCharCount++
+            var typedCharCount = index
+            var correctCharCount = 0
+
+            for(i in 0 until index) {
+                if(sentence[i] == userText[i])
+                    correctCharCount++
+            }
+
+            totalTypedCount += typedCharCount + 1
+            totalCorrectCount += correctCharCount
             index = 0
 
-            totalTypedCount += typedCharCount
-            totalCorrectCount += correctCharCount
-            typedCharCount = 0
-            correctCharCount = 0
-
             showNextWord()
-
-            calcTypingSpeed++
             binding.currentWordText.setText("")
+            calcTypingSpeed++
         } else {
             tempTypingCount++
             if(index < userText.length -1) {
-                if(sentence[index] == userText[index]) {
-                    correctCharCount++
-                    typedCharCount++
-                } else {
-                    typedCharCount++
-                }
                 index++
                 calcTypingSpeed += tempTypingCount
                 tempTypingCount = 0
             } else if(index > userText.length - 1 && userText.length - 1 >= 0) {
-                typedCharCount--
                 index--
 
-                correctCharCount = 0
                 tempTypingCount = 0
-                for(i in 0 until index) {
-                    if(sentence[i] == userText[i])
-                        correctCharCount++
-                }
             }
-
             for(i in 0 until sentence.length)  {
                 if(i < userText.length) {
                     if(sentence[i] != userText[i]) {
