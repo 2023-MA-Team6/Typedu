@@ -170,21 +170,21 @@ class KeyboardActivity : AppCompatActivity() {
         val elapsedTimeTextView: TextView = resultView.findViewById(R.id.elapsedTimeTextView)
         elapsedTimeTextView.text = formatElapsedTime()
 
-        // 다시하기 버튼
-        val restartButton: Button = resultView.findViewById(R.id.restartButton)
-        restartButton.setOnClickListener {
-            val intent = Intent(this, KeyboardActivity::class.java)
-            startActivity(intent)
-            resultDialog.dismiss()
-            // 다시 시작하는 로직 추가
-        }
-
         // 그만하기 버튼
         val finishButton: Button = resultView.findViewById(R.id.finishButton)
         finishButton.setOnClickListener {
             resultDialog.dismiss()
             finish()
             // 액티비티 종료하는 로직 추가
+        }
+        // 다시하기 버튼
+        val restartButton: Button = resultView.findViewById(R.id.restartButton)
+        restartButton.setOnClickListener {
+            resultDialog.dismiss()
+            val intent = Intent(this, KeyboardActivity::class.java)
+            finish()
+            startActivity(intent)
+            // 다시 시작하는 로직 추가
         }
     }
 

@@ -20,7 +20,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import java.util.Collections
 
 class WordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWordBinding
@@ -240,7 +239,6 @@ class WordActivity : AppCompatActivity() {
             resultDialog.dismiss()
             val intent = Intent(this, WordActivity::class.java)
             finish()
-
             startActivity(intent)
         }
 
