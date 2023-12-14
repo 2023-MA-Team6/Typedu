@@ -1,8 +1,10 @@
 package com.example.typedu
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,15 +18,25 @@ import com.example.typedu.databinding.ActivityMainBinding
 import com.example.typedu.databinding.DialogSetArticleBinding
 import com.example.typedu.databinding.DialogSetLangaugeBinding
 import com.example.typedu.databinding.DialogSetTargetBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
+    private val PICK_FILE_REQUEST_CODE = 1
     private var selectedLanguage = "한국어"
     private var backPressedTime: Long = 0L
     private var targetScore:Int? = 0 // 목표 타수
     private var targetAccuracy:Int? = 0 // 목표 정확도
     private var article:Int = 0
-    private var selectedParagraph : String = "null"
+    private var selectedParagraph : String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("MainPage", "start")
@@ -113,6 +125,8 @@ class MainActivity : AppCompatActivity() {
             .setCancelable(true)
             .create()
 
+        Log.d("selectedParagraph", "$selectedParagraph")
+
         setTargetDialog.cancelBtn.setOnClickListener {
             alertDialog.dismiss()
             Log.d("MainPage_Target_Dialog_long", "[메인_긴글] 목표 설정 닫기")
@@ -127,7 +141,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, LongParagraphActivity::class.java)
             intent.putExtra("LongParagraphTargetScore", targetScore.toString())
             intent.putExtra("LongParagraphTargetAccuracy", targetAccuracy.toString())
-            intent.putExtra("selectedParagraph",selectedParagraph)
+            intent.putExtra("selectedParagraph", selectedParagraph)
             startActivity(intent)
         }
         alertDialog.show()
@@ -145,6 +159,13 @@ class MainActivity : AppCompatActivity() {
             .setCancelable(true)
             .create()
 
+        setArticleDialog.loadBtn.setOnClickListener {
+            Log.d("MainPage_Article_Dialog", "[메인_긴글] 글 불러오기")
+            selectedParagraph = null
+            article = -1
+            chooseFile()
+        }
+
         setArticleDialog.cancelBtn.setOnClickListener {
             alertDialog.dismiss()
             Log.d("MainPage_Article_Dialog", "[메인_긴글] 글 선택 닫기")
@@ -153,15 +174,17 @@ class MainActivity : AppCompatActivity() {
             article = setArticleDialog.articlesList.checkedItemPosition
             Log.d("MainPage_Article_Dialog", "[메인_긴글] 선택한 글: $article")
 
-            if(article == -1) // 글 선택하지 않을 시
+            if(article != -1) {
+                selectedParagraph = setArticleDialog.articlesList.adapter.getItem(article).toString()
+            }
+
+            if(selectedParagraph == null) // 글 선택하지 않을 시
                 Toast.makeText(this, R.string.article_dialog_not_selected, Toast.LENGTH_SHORT).show()
             else { // 다음 다이얼로그 (목표 설정)
                 alertDialog.dismiss()
 
-                selectedParagraph = setArticleDialog.articlesList.adapter.getItem(article).toString()
-
                 val intent = Intent(this, LongParagraphActivity::class.java)
-                Log.d("selectedParagraph", selectedParagraph)
+                Log.d("selectedParagraph", "$selectedParagraph")
                 showTargetDialog_long()
             }
         }
@@ -194,7 +217,6 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
                 selectedLanguage = setLanguageSetDialog.languageSpinner.selectedItem as String
                 Log.d("언어", selectedLanguage)
-
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
@@ -218,7 +240,6 @@ class MainActivity : AppCompatActivity() {
         editor.apply()
     }
 
-
     override fun onBackPressed() {
         if (System.currentTimeMillis() - backPressedTime <= 2000) {
             finish()
@@ -227,4 +248,53 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, R.string.main_go_back, Toast.LENGTH_SHORT).show()
         }
     }
+
+
+    fun chooseFile() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "text/plain" // 텍스트 파일 필터링
+        startActivityForResult(intent, PICK_FILE_REQUEST_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_FILE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            data?.data?.let { uri ->
+                val content = readTextFromUri(uri)
+            }
+        }
+    }
+
+    private fun readTextFromUri(uri: Uri): String {
+        val inputStream = contentResolver.openInputStream(uri)
+        val reader = BufferedReader(InputStreamReader(inputStream))
+        val stringBuilder = StringBuilder()
+        var line: String?
+
+        Toast.makeText(this, "파일 로딩 중", Toast.LENGTH_SHORT).show()
+        try {
+            while (reader.readLine().also { line = it } != null) {
+                stringBuilder.append(line)
+                stringBuilder.append("\n")
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+            Toast.makeText(this, "파일 로딩 실패", Toast.LENGTH_SHORT).show()
+        } finally {
+            try {
+                selectedParagraph = stringBuilder.toString()
+                article = -2
+                inputStream?.close()
+                Toast.makeText(this, "파일 로딩 완료", Toast.LENGTH_SHORT).show()
+            } catch (e: IOException) {
+                e.printStackTrace()
+                Toast.makeText(this, "파일 로딩 실패", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        return stringBuilder.toString()
+    }
+
+
+
 }

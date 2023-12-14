@@ -23,6 +23,7 @@ import kotlinx.coroutines.*
 class LongParagraphActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLongParagraphBinding
     private var txtHeader = ""
+    private var userInput = ""
     private var targetScore = ""
     private var targetAccuracy = ""
 
@@ -56,6 +57,7 @@ class LongParagraphActivity : AppCompatActivity() {
         // ScrollView 설정 - 파일 이름으로 리소스 동적으로 선택
         val intent = intent
         txtHeader = intent.getStringExtra("selectedParagraph").toString()
+        userInput = txtHeader
         Log.d("txtHeader", txtHeader)
         setupScrollView(selectParagraph(txtHeader))
 
@@ -120,6 +122,18 @@ class LongParagraphActivity : AppCompatActivity() {
         })
     }
 
+    private fun loadArticle(resourceName: String):String {
+        val resourceId = resources.getIdentifier(resourceName, "raw", packageName)
+
+        // Raw 파일에서 텍스트 읽어오기
+        val inputStream = resources.openRawResource(resourceId)
+        val byteArray = ByteArray(inputStream.available())
+        inputStream.read(byteArray)
+        inputStream.close()
+
+        return String(byteArray)
+    }
+
     private fun setupScrollView(resourceName: String) {
         val scrollView: LinearLayout = findViewById(R.id.contentScrollView)
         val layoutParams = LinearLayout.LayoutParams(
@@ -130,18 +144,38 @@ class LongParagraphActivity : AppCompatActivity() {
         val dp5 = (5 * resources.displayMetrics.density + 0.5f).toInt()
         layoutParams.setMargins(0, dp5, 0, dp5)
 
-        // 파일 이름을 기반으로 리소스 ID 가져오기
-        val resourceId = resources.getIdentifier(resourceName, "raw", packageName)
-
-        // Raw 파일에서 텍스트 읽어오기
-        val inputStream = resources.openRawResource(resourceId)
-        val byteArray = ByteArray(inputStream.available())
-        inputStream.read(byteArray)
-        inputStream.close()
-        val text = String(byteArray)
+        val text = when(resourceName) {
+            "user" -> userInput
+            else -> loadArticle(resourceName)
+        }
 
         // 텍스트를 문장 단위로 나누어 ScrollView에 추가하기
-        val sentenceArray = text.split("\r\n").toTypedArray()
+        val possibleSeparators = listOf("\n", "\r\n", "\r")
+        var selectedSeparator: String = "\n"
+        var maxSentenceCount = 0
+
+        for (separator in possibleSeparators) {
+            val sentenceArray = text.split(separator).toTypedArray().filter{it != ""}.toTypedArray().map { sentence ->
+                when {
+                    sentence.endsWith("\n") -> sentence.substring(0, sentence.length - 1)
+                    sentence.endsWith("\r") -> sentence.substring(0, sentence.length - 1)
+                    else -> sentence
+                }
+            }.toTypedArray()
+
+            if (sentenceArray.size > maxSentenceCount) {
+                maxSentenceCount = sentenceArray.size
+                selectedSeparator = separator
+            }
+        }
+
+        val sentenceArray = text.split(selectedSeparator).toTypedArray().filter{it != ""}.toTypedArray().map { sentence ->
+            when {
+                sentence.endsWith("\n") -> sentence.substring(0, sentence.length - 1)
+                sentence.endsWith("\r") -> sentence.substring(0, sentence.length - 1)
+                else -> sentence
+            }
+        }.toTypedArray()
         for (sentence in sentenceArray) {
             val myView = LayoutInflater.from(this).inflate(R.layout.scrollview_long_paragraph_list, null)
 
@@ -360,7 +394,7 @@ class LongParagraphActivity : AppCompatActivity() {
             "Wellerman" -> "en_wellerman"
             "When i was your man" -> "en_when_i_was_your_man"
             "test"->"test"
-            else -> "ko_the_silence_of_love"
+            else -> "user"
         }
     }
 
