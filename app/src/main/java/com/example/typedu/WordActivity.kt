@@ -25,7 +25,6 @@ class WordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWordBinding
     private lateinit var wordList: List<String>
     private var currentWordIndex = 0
-    private var correctWordCount = 0
 
     private var isTyping = false
     private var highestTypingSpeed = 0
@@ -118,7 +117,7 @@ class WordActivity : AppCompatActivity() {
         val spannableString = SpannableString(sentence)
 
         if(sentence == userText) {
-            var typedCharCount = index
+            val typedCharCount = index
             var correctCharCount = 0
 
             for(i in 0 until index) {
@@ -134,7 +133,7 @@ class WordActivity : AppCompatActivity() {
             binding.currentWordText.setText("")
             calcTypingSpeed++
         } else if(sentence.length < userText.length) {
-            var typedCharCount = index
+            val typedCharCount = index
             var correctCharCount = 0
 
             for(i in 0 until index) {
@@ -155,12 +154,12 @@ class WordActivity : AppCompatActivity() {
                 index++
                 calcTypingSpeed += tempTypingCount
                 tempTypingCount = 0
-            } else if(index > userText.length - 1 && userText.length - 1 >= 0) {
+            } else if(userText.length - 1 in 0..<index) {
                 index--
 
                 tempTypingCount = 0
             }
-            for(i in 0 until sentence.length)  {
+            for(i in sentence.indices)  {
                 if(i < userText.length) {
                     if(sentence[i] != userText[i]) {
                         //틀린 글자는 빨강으로
@@ -219,10 +218,10 @@ class WordActivity : AppCompatActivity() {
         goalTypingTextView.text = "-"
 
         val averageTypingTextView: TextView = resultView.findViewById(R.id.averageTypingTextView)
-        averageTypingTextView.text = "${currentTypingSpeed}"
+        averageTypingTextView.text = "$currentTypingSpeed"
 
         val highestTypingTextView: TextView = resultView.findViewById(R.id.highestTypingTextView)
-        highestTypingTextView.text = "${highestTypingSpeed}" // 여기에 최고 타수 변수 추가
+        highestTypingTextView.text = "$highestTypingSpeed" // 여기에 최고 타수 변수 추가
 
         val goalAccuracyTextView: TextView = resultView.findViewById(R.id.goalAccuracyTextView)
         goalAccuracyTextView.text = "-"

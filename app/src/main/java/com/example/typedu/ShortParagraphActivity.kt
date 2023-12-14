@@ -9,7 +9,6 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextWatcher
 import android.text.style.ForegroundColorSpan
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
@@ -183,7 +182,7 @@ class ShortParagraphActivity : AppCompatActivity() {
         val spannableString = SpannableString(sentence)
 
         if(sentence == userText) {
-            var typedCharCount = index
+            val typedCharCount = index
             var correctCharCount = 0
 
             for(i in 0 until index) {
@@ -199,7 +198,7 @@ class ShortParagraphActivity : AppCompatActivity() {
             binding.currentWordText.setText("")
             calcTypingSpeed++
         } else if(sentence.length < userText.length) {
-            var typedCharCount = index
+            val typedCharCount = index
             var correctCharCount = 0
 
             for(i in 0 until index) {
@@ -220,12 +219,12 @@ class ShortParagraphActivity : AppCompatActivity() {
                 index++
                 calcTypingSpeed += tempTypingCount
                 tempTypingCount = 0
-            } else if(index > userText.length - 1 && userText.length - 1 >= 0) {
+            } else if(userText.length - 1 in 0..<index) {
                 index--
 
                 tempTypingCount = 0
             }
-            for(i in 0 until sentence.length)  {
+            for(i in sentence.indices)  {
                 if(i < userText.length) {
                     if(sentence[i] != userText[i]) {
                         //틀린 글자는 빨강으로
@@ -268,10 +267,10 @@ class ShortParagraphActivity : AppCompatActivity() {
         goalTypingTextView.text = "${intent.getStringExtra("ShortParagraphTargetScore")}"
 
         val averageTypingTextView: TextView = resultView.findViewById(R.id.averageTypingTextView)
-        averageTypingTextView.text = "${currentTypingSpeed}"
+        averageTypingTextView.text = "$currentTypingSpeed"
 
         val highestTypingTextView: TextView = resultView.findViewById(R.id.highestTypingTextView)
-        highestTypingTextView.text = "${highestTypingSpeed}" // 여기에 최고 타수 변수 추가
+        highestTypingTextView.text = "$highestTypingSpeed" // 여기에 최고 타수 변수 추가
 
         val goalAccuracyTextView: TextView = resultView.findViewById(R.id.goalAccuracyTextView)
         goalAccuracyTextView.text = "${intent.getStringExtra("ShortParagraphTargetAccuracy")}"
@@ -280,16 +279,16 @@ class ShortParagraphActivity : AppCompatActivity() {
         accuracyTextView.text = "${calculateAccuracy()}%"
 
         val elapsedTimeTextView: TextView = resultView.findViewById(R.id.elapsedTimeTextView)
-        elapsedTimeTextView.text = "${formatElapsedTime()}"
+        elapsedTimeTextView.text = formatElapsedTime()
 
         // 다시하기 버튼
         val restartButton: Button = resultView.findViewById(R.id.restartButton)
         restartButton.setOnClickListener {
             resultDialog.dismiss()
-            val intent = Intent(this, ShortParagraphActivity::class.java)
+            val intentRestart = Intent(this, ShortParagraphActivity::class.java)
             finish()
 
-            startActivity(intent)
+            startActivity(intentRestart)
             // 다시 시작하는 로직 추가
         }
 

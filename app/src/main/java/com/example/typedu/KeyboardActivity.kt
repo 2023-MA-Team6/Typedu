@@ -190,7 +190,7 @@ class KeyboardActivity : AppCompatActivity() {
 
     private fun shiftTextLeft() {
         // 1번째 TextView 초기화
-        (binding.WordView.getChildAt(0) as TextView)?.text = ""
+        (binding.WordView.getChildAt(0) as TextView).text = ""
 
         // 2번째와 3번째 TextView의 값 이동
         for (i in 0..1) {

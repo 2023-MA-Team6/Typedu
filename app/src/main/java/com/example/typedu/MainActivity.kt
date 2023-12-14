@@ -18,12 +18,6 @@ import com.example.typedu.databinding.ActivityMainBinding
 import com.example.typedu.databinding.DialogSetArticleBinding
 import com.example.typedu.databinding.DialogSetLangaugeBinding
 import com.example.typedu.databinding.DialogSetTargetBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -75,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         // 언어 설정 버튼 클릭
         binding.languageSettingBtn.setOnClickListener {
             Log.d("Typedu_monitor", "[메인] 언어 설정 버튼 클릭")
-            showLanguageSetDialog();
+            showLanguageSetDialog()
         }
     }
 
@@ -186,7 +180,6 @@ class MainActivity : AppCompatActivity() {
             else { // 다음 다이얼로그 (목표 설정)
                 alertDialog.dismiss()
 
-                val intent = Intent(this, LongParagraphActivity::class.java)
                 showTargetDialogLong()
             }
         }
@@ -264,7 +257,7 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_FILE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             data?.data?.let { uri ->
-                val content = readTextFromUri(uri)
+                readTextFromUri(uri)
             }
         }
     }
