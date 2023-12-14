@@ -19,6 +19,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.typedu.databinding.ActivityLongParagraphBinding
 import kotlinx.coroutines.*
+import java.io.File.separator
 
 class LongParagraphActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLongParagraphBinding
@@ -58,7 +59,7 @@ class LongParagraphActivity : AppCompatActivity() {
         val intent = intent
         txtHeader = intent.getStringExtra("selectedParagraph").toString()
         userInput = txtHeader
-        Log.d("txtHeader", txtHeader)
+        Log.d("Typedu_monitor", "[긴글연습] txtHeader: $txtHeader")
         setupScrollView(selectParagraph(txtHeader))
 
         // 다음 문장 표시
@@ -122,7 +123,7 @@ class LongParagraphActivity : AppCompatActivity() {
         })
     }
 
-    private fun loadArticle(resourceName: String):String {
+    private fun loadArticle(resourceName: String) : String {
         val resourceId = resources.getIdentifier(resourceName, "raw", packageName)
 
         // Raw 파일에서 텍스트 읽어오기
@@ -132,6 +133,34 @@ class LongParagraphActivity : AppCompatActivity() {
         inputStream.close()
 
         return String(byteArray)
+    }
+
+    private fun makeSentenceArray(text:String, separator:String) : Array<String> {
+        return text.split(separator).toTypedArray().filter{it != ""}.toTypedArray().map { sentence ->
+            when {
+                sentence.endsWith("\n") -> sentence.substring(0, sentence.length - 1)
+                sentence.endsWith("\r") -> sentence.substring(0, sentence.length - 1)
+                sentence.endsWith(" ") -> sentence.substring(0, sentence.length - 1)
+                else -> sentence
+            }
+        }.toTypedArray()
+    }
+
+    private fun separateText(text:String) : Array<String> {
+        val possibleSeparators = listOf("\n", "\r\n", "\r")
+        var selectedSeparator: String = "\n"
+        var maxSentenceCount = 0
+
+        for (separator in possibleSeparators) {
+            val sentenceArray = makeSentenceArray(text, separator)
+
+            if (sentenceArray.size > maxSentenceCount) {
+                maxSentenceCount = sentenceArray.size
+                selectedSeparator = separator
+            }
+        }
+
+        return makeSentenceArray(text, selectedSeparator)
     }
 
     private fun setupScrollView(resourceName: String) {
@@ -149,33 +178,7 @@ class LongParagraphActivity : AppCompatActivity() {
             else -> loadArticle(resourceName)
         }
 
-        // 텍스트를 문장 단위로 나누어 ScrollView에 추가하기
-        val possibleSeparators = listOf("\n", "\r\n", "\r")
-        var selectedSeparator: String = "\n"
-        var maxSentenceCount = 0
-
-        for (separator in possibleSeparators) {
-            val sentenceArray = text.split(separator).toTypedArray().filter{it != ""}.toTypedArray().map { sentence ->
-                when {
-                    sentence.endsWith("\n") -> sentence.substring(0, sentence.length - 1)
-                    sentence.endsWith("\r") -> sentence.substring(0, sentence.length - 1)
-                    else -> sentence
-                }
-            }.toTypedArray()
-
-            if (sentenceArray.size > maxSentenceCount) {
-                maxSentenceCount = sentenceArray.size
-                selectedSeparator = separator
-            }
-        }
-
-        val sentenceArray = text.split(selectedSeparator).toTypedArray().filter{it != ""}.toTypedArray().map { sentence ->
-            when {
-                sentence.endsWith("\n") -> sentence.substring(0, sentence.length - 1)
-                sentence.endsWith("\r") -> sentence.substring(0, sentence.length - 1)
-                else -> sentence
-            }
-        }.toTypedArray()
+        val sentenceArray = separateText(text)
         for (sentence in sentenceArray) {
             val myView = LayoutInflater.from(this).inflate(R.layout.scrollview_long_paragraph_list, null)
 

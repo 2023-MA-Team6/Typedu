@@ -33,65 +33,67 @@ class MainActivity : AppCompatActivity() {
     private val PICK_FILE_REQUEST_CODE = 1
     private var selectedLanguage = "한국어"
     private var backPressedTime: Long = 0L
+
     private var targetScore:Int? = 0 // 목표 타수
     private var targetAccuracy:Int? = 0 // 목표 정확도
     private var article:Int = 0
     private var selectedParagraph : String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("MainPage", "start")
+        Log.d("Typedu_monitor", "start")
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // 자판 연습 버튼 클릭
         binding.keyPrBtn.setOnClickListener {
-            Log.d("MainPage", "[메인] 자판 연습 버튼 클릭")
+            Log.d("Typedu_monitor", "[메인] 자판 연습 버튼 클릭")
             val intent = Intent(this, KeyboardActivity::class.java)
             startActivity(intent)
         }
 
         // 낱말 연습 버튼 클릭
         binding.wordPrBtn.setOnClickListener {
-            Log.d("MainPage", "[메인] 낱말 연습 버튼 클릭")
+            Log.d("Typedu_monitor", "[메인] 낱말 연습 버튼 클릭")
             val intent = Intent(this, WordActivity::class.java)
             startActivity(intent)
         }
 
         // 짧은 글 연습 버튼 클릭
         binding.sentencePrBtn.setOnClickListener {
-            Log.d("MainPage", "[메인] 짧은 글 연습 버튼 클릭")
-            showTargetDialog_short()
+            Log.d("Typedu_monitor", "[메인] 짧은 글 연습 버튼 클릭")
+            showTargetDialogShort()
         }
 
         // 긴 글 연습 버튼 클릭
         binding.articlePrBtn.setOnClickListener {
-            Log.d("MainPage", "[메인] 긴 글 연습 버튼 클릭")
+            Log.d("Typedu_monitor", "[메인] 긴 글 연습 버튼 클릭")
             showArticleDialog()
         }
 
-
         // 언어 설정 버튼 클릭
         binding.languageSettingBtn.setOnClickListener {
-            Log.d("MainPage", "[메인] 언어 설정 버튼 클릭")
+            Log.d("Typedu_monitor", "[메인] 언어 설정 버튼 클릭")
             showLanguageSetDialog();
         }
     }
 
-    // 타수 설정
-    fun setTarget(scoreInput: EditText, accuracyInput:EditText) {
-        if(scoreInput.text.toString() != "")
-            targetScore = Integer.parseInt(scoreInput.text.toString())
-        else
-            targetScore = 250
+    private fun setTarget(scoreInput: EditText, accuracyInput:EditText) {
+        targetScore =
+            if(scoreInput.text.toString() != "")
+                Integer.parseInt(scoreInput.text.toString())
+            else
+                250
 
-        if(accuracyInput.text.toString() != "")
-            targetAccuracy = Integer.parseInt(accuracyInput.text.toString())
-        else
-            targetAccuracy = 90
+        targetAccuracy =
+            if(accuracyInput.text.toString() != "")
+                Integer.parseInt(accuracyInput.text.toString())
+            else
+                90
     }
 
-    fun showTargetDialog_short() {
+    private fun showTargetDialogShort() {
         val setTargetDialog = DialogSetTargetBinding.inflate(layoutInflater)
 
         val alertDialog =  AlertDialog.Builder(this)
@@ -101,11 +103,11 @@ class MainActivity : AppCompatActivity() {
 
         setTargetDialog.cancelBtn.setOnClickListener {
             alertDialog.dismiss()
-            Log.d("MainPage_Target_Dialog_short", "[메인_짧은글] 목표 설정 닫기")
+            Log.d("Typedu_monitor", "[메인_짧은글] 목표 설정 닫기")
         }
         setTargetDialog.nextBtn.setOnClickListener {
             setTarget(setTargetDialog.targetScoreInput, setTargetDialog.targetAccuracyInput)
-            Log.d("MainPage_Target_Dialog_short", "[메인_짧은글] 목표 설정 / 타수: $targetScore / 정확도: $targetAccuracy")
+            Log.d("Typedu_monitor", "[메인_짧은글] 목표 설정 / 타수: $targetScore / 정확도: $targetAccuracy")
             alertDialog.dismiss()
 
             val intent = Intent(this, ShortParagraphActivity::class.java)
@@ -117,7 +119,7 @@ class MainActivity : AppCompatActivity() {
         alertDialog.show()
     }
 
-    fun showTargetDialog_long() {
+    private fun showTargetDialogLong() {
         val setTargetDialog = DialogSetTargetBinding.inflate(layoutInflater)
 
         val alertDialog =  AlertDialog.Builder(this)
@@ -125,18 +127,17 @@ class MainActivity : AppCompatActivity() {
             .setCancelable(true)
             .create()
 
-        Log.d("selectedParagraph", "$selectedParagraph")
-
         setTargetDialog.cancelBtn.setOnClickListener {
             alertDialog.dismiss()
-            Log.d("MainPage_Target_Dialog_long", "[메인_긴글] 목표 설정 닫기")
+            Log.d("Typedu_monitor", "[메인_긴글] 목표 설정 닫기")
 
             showArticleDialog()
         }
+
         setTargetDialog.nextBtn.setOnClickListener {
             setTarget(setTargetDialog.targetScoreInput, setTargetDialog.targetAccuracyInput)
             alertDialog.dismiss()
-            Log.d("MainPage_Target_Dialog_long", "[메인_긴글] 목표 설정 / 타수: $targetScore / 정확도: $targetAccuracy")
+            Log.d("Typedu_monitor", "[메인_긴글] 목표 설정 / 타수: $targetScore / 정확도: $targetAccuracy")
 
             val intent = Intent(this, LongParagraphActivity::class.java)
             intent.putExtra("LongParagraphTargetScore", targetScore.toString())
@@ -144,10 +145,11 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("selectedParagraph", selectedParagraph)
             startActivity(intent)
         }
+
         alertDialog.show()
     }
 
-    fun showArticleDialog() {
+    private fun showArticleDialog() {
         val setArticleDialog = DialogSetArticleBinding.inflate(layoutInflater)
         val titles = resources.getStringArray(R.array.article_title)
         val adapter = ArrayAdapter(this, R.layout.listview_typing_list, titles)
@@ -160,23 +162,24 @@ class MainActivity : AppCompatActivity() {
             .create()
 
         setArticleDialog.loadBtn.setOnClickListener {
-            Log.d("MainPage_Article_Dialog", "[메인_긴글] 글 불러오기")
+            Log.d("Typedu_monitor", "[메인_긴글] 글 불러오기")
             selectedParagraph = null
             article = -1
+
             chooseFile()
         }
 
         setArticleDialog.cancelBtn.setOnClickListener {
             alertDialog.dismiss()
-            Log.d("MainPage_Article_Dialog", "[메인_긴글] 글 선택 닫기")
+            Log.d("Typedu_monitor", "[메인_긴글] 글 선택 닫기")
         }
         setArticleDialog.nextBtn.setOnClickListener {
             article = setArticleDialog.articlesList.checkedItemPosition
-            Log.d("MainPage_Article_Dialog", "[메인_긴글] 선택한 글: $article")
-
             if(article != -1) {
                 selectedParagraph = setArticleDialog.articlesList.adapter.getItem(article).toString()
             }
+
+            Log.d("Typedu_monitor", "[메인_긴글] 글 번호: $article / 글 내용: $selectedParagraph")
 
             if(selectedParagraph == null) // 글 선택하지 않을 시
                 Toast.makeText(this, R.string.article_dialog_not_selected, Toast.LENGTH_SHORT).show()
@@ -184,14 +187,13 @@ class MainActivity : AppCompatActivity() {
                 alertDialog.dismiss()
 
                 val intent = Intent(this, LongParagraphActivity::class.java)
-                Log.d("selectedParagraph", "$selectedParagraph")
-                showTargetDialog_long()
+                showTargetDialogLong()
             }
         }
         alertDialog.show()
     }
 
-    fun showLanguageSetDialog() {
+    private fun showLanguageSetDialog() {
         val setLanguageSetDialog = DialogSetLangaugeBinding.inflate(layoutInflater)
         val languages = resources.getStringArray(R.array.language)
         val adapter = ArrayAdapter(this, R.layout.spinner_language_list, languages)
@@ -216,7 +218,7 @@ class MainActivity : AppCompatActivity() {
         setLanguageSetDialog.languageSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
                 selectedLanguage = setLanguageSetDialog.languageSpinner.selectedItem as String
-                Log.d("언어", selectedLanguage)
+                Log.d("Typedu_monitor", "[메인_언어설정] $selectedLanguage")
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
@@ -225,9 +227,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     // 언어 설정 - "en", "ja", "ko-rKR" 입력하면 그에 맞게 언어가 바뀜
-    private fun setLocate(Lang: String) {
-        Log.d("로그", "setLocate")
-        val locale = Locale(Lang)
+    private fun setLocate(lang: String) {
+        Log.d("Typedu_monitor", "[메인_언어설정] setLocate")
+        val locale = Locale(lang)
         Locale.setDefault(locale)
 
         val config = Configuration()
@@ -236,12 +238,13 @@ class MainActivity : AppCompatActivity() {
         baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
 
         val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
-        editor.putString("My_Lang", Lang)
+        editor.putString("My_Lang", lang)
         editor.apply()
     }
 
     override fun onBackPressed() {
         if (System.currentTimeMillis() - backPressedTime <= 2000) {
+            Log.d("Typedu_monitor", "end")
             finish()
         } else {
             backPressedTime = System.currentTimeMillis()
@@ -250,9 +253,10 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun chooseFile() {
+    // 글 불러오기
+    private fun chooseFile() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.type = "text/plain" // 텍스트 파일 필터링
+        intent.type = "text/plain"
         startActivityForResult(intent, PICK_FILE_REQUEST_CODE)
     }
 
@@ -271,7 +275,9 @@ class MainActivity : AppCompatActivity() {
         val stringBuilder = StringBuilder()
         var line: String?
 
-        Toast.makeText(this, "파일 로딩 중", Toast.LENGTH_SHORT).show()
+        Log.d("Typedu_monitor", "[메인_긴글] 글 불러오기 Uri: $uri")
+        Toast.makeText(this, "File loading in progress...", Toast.LENGTH_SHORT).show()
+
         try {
             while (reader.readLine().also { line = it } != null) {
                 stringBuilder.append(line)
@@ -279,16 +285,16 @@ class MainActivity : AppCompatActivity() {
             }
         } catch (e: IOException) {
             e.printStackTrace()
-            Toast.makeText(this, "파일 로딩 실패", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "File loading failed", Toast.LENGTH_SHORT).show()
         } finally {
             try {
                 selectedParagraph = stringBuilder.toString()
-                article = -2
                 inputStream?.close()
-                Toast.makeText(this, "파일 로딩 완료", Toast.LENGTH_SHORT).show()
+                Log.d("Typedu_monitor", "[메인_긴글] 글 불러오기 완료")
+                Toast.makeText(this, "File loading completed", Toast.LENGTH_SHORT).show()
             } catch (e: IOException) {
                 e.printStackTrace()
-                Toast.makeText(this, "파일 로딩 실패", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "File loading failed", Toast.LENGTH_SHORT).show()
             }
         }
 
