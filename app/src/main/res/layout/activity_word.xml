@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.ActionBar.Primary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/toolbarTitle"
+            android:text="@string/main_menu2_name"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/statusMargin"
+        android:orientation="horizontal">
+
+        <!-- 최고 타수 -->
+        <LinearLayout
+            android:id="@+id/highestTypingLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusTitle"
+                android:text="@string/word_layout_highest_stroke"/>
+
+            <TextView
+                android:id="@+id/highestTyping"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusContent"
+                android:text="0"/>
+        </LinearLayout>
+
+        <!-- 현재 타수 -->
+        <LinearLayout
+            android:id="@+id/currentTypingLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusTitle"
+                android:text="@string/word_layout_current_stroke"/>
+
+            <TextView
+                android:id="@+id/currentTyping"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusContent"
+                android:text="0"/>
+        </LinearLayout>
+
+        <!-- 정확도 -->
+        <LinearLayout
+            android:id="@+id/accuracyLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusTitle"
+                android:text="@string/word_layout_accuracy"/>
+
+            <TextView
+                android:id="@+id/accuracy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusContent"
+                android:text="0%"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!-- 입력할 현재 단어 표시 -->
+    <RelativeLayout
+        android:id="@+id/currentWordLayout"
+        android:layout_width="wrap_content"
+        android:minWidth="280dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        style="@style/TypingWord">
+
+        <TextView
+            android:id="@+id/inputWord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_semi_bold"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
+            android:layout_marginTop="5dp"
+            android:textSize="22sp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/word_input_word"/>
+
+
+        <TextView
+            android:id="@+id/currentWord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_semi_bold"
+            android:layout_alignParentBottom="true"
+            android:includeFontPadding="false"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            android:text="test"
+            android:textColor="@color/typeedu_brown"
+            android:textSize="52sp" />
+    </RelativeLayout>
+
+    <!-- 입력란 -->
+    <EditText
+        android:id="@+id/currentWordText"
+        android:layout_width="wrap_content"
+        android:minWidth="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_typing_inputbox"
+        android:textCursorDrawable="@drawable/shape_typing_cursor"
+        android:fontFamily="@font/noto_sans_kr_regular"
+        android:includeFontPadding="false"
+        android:textSize="32sp"
+        android:textColor="@color/black"
+        android:textAlignment="center"/>
+
+    <!-- 다음에 입력할 단어 표시 -->
+    <LinearLayout
+        android:id="@+id/nextWordLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/noto_sans_kr_semi_bold"
+            android:includeFontPadding="false"
+            android:textSize="20sp"
+            android:textColor="@color/typeedu_grey"
+            android:text="@string/word_layout_next_word"/>
+
+        <TextView
+            android:id="@+id/nextWord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/noto_sans_kr_semi_bold"
+            android:includeFontPadding="false"
+            android:textSize="28sp"
+            android:textColor="@color/typeedu_orange"
+            android:text=""/>
+    </LinearLayout>
+
+</LinearLayout>

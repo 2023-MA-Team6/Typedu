@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/result_dialog_layout.xml -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- "결과" 타이틀 -->
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        style="@style/PopupTitleStyle"
+        android:text="@string/result_dialog_result"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal">
+
+        <!-- "목표 타수" -->
+        <LinearLayout
+            android:id="@+id/goalTypingLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="top|center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/goalTypingLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusResultTitle"
+                android:text="@string/result_dialog_target_stroke"/>
+
+            <TextView
+                android:id="@+id/goalTypingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusResultContent"
+                android:text="000 타"/>
+
+        </LinearLayout>
+        <!-- "평균 타수" -->
+        <LinearLayout
+            android:id="@+id/averageTypingLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="top|center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/averageTypingLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusResultTitle"
+                android:textColor="@color/typeedu_orange"
+                android:text="@string/result_dialog_average_stroke"/>
+
+            <TextView
+                android:id="@+id/averageTypingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusResultContent"
+                android:textColor="@color/typeedu_orange"
+                android:text="000 타"/>
+
+            <LinearLayout
+                android:id="@+id/highestTypingLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/highestTypingLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/statusResultExtra"
+                    android:text="@string/result_dialog_highest_stroke"/>
+
+                <TextView
+                    android:id="@+id/highestTypingTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    style="@style/statusResultExtra"
+                    android:text="000 타"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- "최고 타수" -->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal">
+
+        <!-- "목표 정확도" -->
+        <LinearLayout
+            android:id="@+id/goalAccuracyLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="top|center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/goalAccuracyLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusResultTitle"
+                android:text="@string/result_dialog_target_accuracy"/>
+
+            <TextView
+                android:id="@+id/goalAccuracyTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusResultContent"
+                android:text="00 %"/>
+
+        </LinearLayout>
+
+        <!-- "정확도" -->
+        <LinearLayout
+            android:id="@+id/accuracyLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="top|center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/accuracyLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusResultTitle"
+                android:textColor="@color/typeedu_orange"
+                android:text="@string/result_dialog_accuracy"/>
+
+            <TextView
+                android:id="@+id/accuracyTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusResultContent"
+                android:textColor="@color/typeedu_orange"
+                android:text="00 %"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- "소요 시간" -->
+    <LinearLayout
+        android:id="@+id/elapsedTimeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="top|center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/elapsedTimeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/statusResultTitle"
+            android:text="@string/result_dialog_spend_time"/>
+
+        <TextView
+            android:id="@+id/elapsedTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/statusResultContent"
+            android:text="00:00"/>
+
+    </LinearLayout>
+
+    <!-- 그만하기 및 다시하기 버튼 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal">
+
+        <!-- 그만하기 버튼 -->
+        <Button
+            android:id="@+id/finishButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            style="@style/PopupMenuBtnStyle"
+            android:background="@drawable/shape_grey_btn"
+            android:text="@string/result_dialog_stop"/>
+
+        <!-- 다시하기 버튼 -->
+        <Button
+            android:id="@+id/restartButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            style="@style/PopupMenuBtnStyle"
+            android:background="@drawable/shape_orange_btn"
+            android:text="@string/result_dialog_recall"/>
+
+    </LinearLayout>
+</LinearLayout>

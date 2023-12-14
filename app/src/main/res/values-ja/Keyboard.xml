@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="keyboard_arr">
+        <item>む</item>
+        <item>て</item>
+        <item>わ</item>
+        <item>か</item>
+        <item>け</item>
+        <item>と</item>
+        <item>き</item>
+        <item>あ</item>
+        <item>し</item>
+        <item>う</item>
+        <item>ま</item>
+        <item>め</item>
+        <item>た</item>
+        <item>よ</item>
+        <item>り</item>
+        <item>ん</item>
+        <item>も</item>
+        <item>く</item>
+        <item>ら</item>
+        <item>に</item>
+        <item>け</item>
+        <item>ふ</item>
+        <item>へ</item>
+        <item>ア</item>
+        <item>イ</item>
+        <item>ウ</item>
+        <item>エ</item>
+        <item>オ</item>
+        <item>ガ</item>
+        <item>ギ</item>
+        <item>グ</item>
+        <item>ゲ</item>
+        <item>ゴ</item>
+        <item>サ</item>
+        <item>シ</item>
+        <item>ス</item>
+        <item>セ</item>
+        <item>ソ</item>
+        <item>ザ</item>
+        <item>ジ</item>
+        <item>ズ</item>
+        <item>ネ</item>
+        <item>レ</item>
+        <item>ロ</item>
+        <item>ワ</item>
+        <item>ヰ</item>
+        <item>ヲ</item>
+        <item>ン</item>
+        <item>ほ</item>
+        <item>れ</item>
+    </string-array>
+</resources>

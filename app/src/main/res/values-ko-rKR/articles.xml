@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string-array name="article_title" tools:ignore="InconsistentArrays">
+        <item>별 헤는 밤</item>
+        <item>애국가</item>
+        <item>금도끼 은도끼</item>
+        <item>별주부전</item>
+        <item>님의 침묵</item>
+        <item>어린왕자</item>
+        <item>test</item>
+    </string-array>
+</resources>

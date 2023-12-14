@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="word_arr">
+        <item>speak</item>
+        <item>grab</item>
+        <item>play</item>
+        <item>rise</item>
+        <item>run</item>
+        <item>laugh</item>
+        <item>cry</item>
+        <item>think</item>
+        <item>sit</item>
+        <item>move</item>
+        <item>walk</item>
+        <item>rise</item>
+        <item>jump</item>
+        <item>sweep</item>
+        <item>place</item>
+        <item>turn off</item>
+        <item>leave</item>
+        <item>meet</item>
+        <item>fall</item>
+        <item>close</item>
+        <item>happiness</item>
+        <item>challenge</item>
+        <item>dream</item>
+        <item>friendship</item>
+        <item>learning</item>
+        <item>smile</item>
+        <item>art</item>
+        <item>adventure</item>
+        <item>cooperation</item>
+        <item>freedom</item>
+        <item>success</item>
+        <item>passion</item>
+        <item>help</item>
+        <item>preparation</item>
+        <item>practice</item>
+        <item>respect</item>
+        <item>dedication</item>
+        <item>hope</item>
+        <item>achievement</item>
+        <item>trust</item>
+        <item>strengthen</item>
+        <item>thanks</item>
+        <item>life</item>
+        <item>courage</item>
+        <item>quiet</item>
+        <item>connection</item>
+        <item>cooperation</item>
+        <item>wish</item>
+        <item>wisdom</item>
+        <item>simplicity</item>
+    </string-array>
+</resources>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clipToPadding="false">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="65sp"
+            android:text="@string/app_name"
+            android:textSize="55sp"
+            android:textColor="#000"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:includeFontPadding="false"/>
+
+        <Button
+            android:id="@+id/key_pr_btn"
+            style="@style/MainMenuBtnStyle"
+            android:text="@string/main_menu1_name"
+            />
+
+        <Button
+            android:id="@+id/word_pr_btn"
+            style="@style/MainMenuBtnStyle"
+            android:text="@string/main_menu2_name"/>
+
+        <Button
+            android:id="@+id/sentence_pr_btn"
+            style="@style/MainMenuBtnStyle"
+            android:text="@string/main_menu3_name"/>
+
+        <Button
+            android:id="@+id/article_pr_btn"
+            style="@style/MainMenuBtnStyle"
+            android:text="@string/main_menu4_name"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/language_setting_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="20dp"
+            android:background="#0000"
+            android:drawableEnd="@drawable/icon_option"
+            android:drawablePadding="10dp"
+            android:text="@string/main_setting"
+            android:textColor="#666"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/noto_sans_kr_regular"
+            android:includeFontPadding="false"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.ActionBar.Primary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/toolbarTitle"
+            android:text="@string/main_menu4_name"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        style="@style/statusMargin">
+
+        <!-- 시간 -->
+        <LinearLayout
+            android:id="@+id/timerLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusTitle"
+                android:text="@string/short_long_paragraph_layout_progress_time"/>
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusContent"
+                android:text="00:00"/>
+        </LinearLayout>
+
+        <!-- 최고 타수 -->
+        <LinearLayout
+            android:id="@+id/highestTypingLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusTitle"
+                android:text="@string/short_long_paragraph_layout_highest_stroke"/>
+
+            <TextView
+                android:id="@+id/highestTyping"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusContent"
+                android:text="0"/>
+        </LinearLayout>
+
+        <!-- 현재 타수 -->
+        <LinearLayout
+            android:id="@+id/currentTypingLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusTitle"
+                android:text="@string/short_long_paragraph_layout_current_stroke"/>
+
+            <TextView
+                android:id="@+id/currentTyping"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusContent"
+                android:text="0"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/accuracyLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusTitle"
+                android:text="@string/short_long_paragraph_layout_accuracy"/>
+
+            <TextView
+                android:id="@+id/accuracy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/statusContent"
+                android:text="0%"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/currentStatement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="80dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="15dp"
+        android:padding="10dp"
+        android:text=""
+        android:fontFamily="@font/noto_sans_kr_semi_bold"
+        android:includeFontPadding="false"
+        android:textColor="@color/white"
+        android:textAlignment="viewStart"
+        android:textSize="20sp"
+        style="@style/TypingNow"/>
+
+    <!-- 입력란 -->
+    <EditText
+        android:id="@+id/currentWordText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="10dp"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="0dp"
+        android:background="@drawable/shape_typing_inputbox"
+        android:textCursorDrawable="@drawable/shape_typing_cursor"
+        android:fontFamily="@font/noto_sans_kr_semi_bold"
+        android:includeFontPadding="false"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textAlignment="viewStart" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:id="@+id/contentScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

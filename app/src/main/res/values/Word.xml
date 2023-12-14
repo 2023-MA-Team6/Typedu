@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="word_arr">
+        <item>말하다</item>
+        <item>잡다</item>
+        <item>놀다</item>
+        <item>일어나다</item>
+        <item>뛰다</item>
+        <item>웃다</item>
+        <item>울다</item>
+        <item>생각하다</item>
+        <item>앉다</item>
+        <item>움직이다</item>
+        <item>걷다</item>
+        <item>높아지다</item>
+        <item>뛰어오다</item>
+        <item>쓸다</item>
+        <item>놓다</item>
+        <item>끄다</item>
+        <item>떠나다</item>
+        <item>만나다</item>
+        <item>떨어지다</item>
+        <item>닫다</item>
+        <item>행복</item>
+        <item>도전</item>
+        <item>꿈</item>
+        <item>우정</item>
+        <item>학문</item>
+        <item>미소</item>
+        <item>예술</item>
+        <item>모험</item>
+        <item>협력</item>
+        <item>자유</item>
+        <item>성공</item>
+        <item>열정</item>
+        <item>도움</item>
+        <item>예비</item>
+        <item>실천</item>
+        <item>존중</item>
+        <item>헌신</item>
+        <item>희망</item>
+        <item>업적</item>
+        <item>신뢰</item>
+        <item>강화</item>
+        <item>감사</item>
+        <item>인생</item>
+        <item>용기</item>
+        <item>고요</item>
+        <item>인연</item>
+        <item>협력</item>
+        <item>소망</item>
+        <item>지혜</item>
+        <item>소박</item>
+    </string-array>
+</resources>

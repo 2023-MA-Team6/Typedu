@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Typedu</string>
+    <string name="main_menu1_name">자판 연습</string>
+    <string name="main_menu2_name">낱말 연습</string>
+    <string name="main_menu3_name">짧은 글 연습</string>
+    <string name="main_menu4_name">긴 글 연습</string>
+    <string name="main_setting">언어 설정</string>
+    <string name="set_tartget_ta">타</string>
+    <string name="popup_articleselect_title">긴 글 선택</string>
+    <string name="popup_articleselect_load">새 글 불러오기</string>
+    <string name="popup_languageset_title">언어 설정</string>
+    <string name="popup_targetset_title">목표 설정</string>
+    <string name="popup_targetset_targetspeed">목표 타수</string>
+    <string name="popup_targetset_targetaccuracy">목표 정확도</string>
+    <string name="popup_start">시작</string>
+    <string name="popup_next">다음</string>
+    <string name="popup_cancel">취소</string>
+    <string name="popup_close">닫기</string>
+    <string name="main_go_back">한 번 더 누르면 종료됩니다.</string>
+    <string name="article_dialog_not_selected">글을 선택하거나 업로드해주세요</string>
+
+
+    <string name="keyboard_layout_current_stroke">현재 타수</string>
+    <string name="keyboard_layout_number_of_characters_entered">입력한 글자 수</string>
+    <string name="keyboard_layout_next_word">입력할 글자</string>
+
+    <string name="short_long_paragraph_layout_progress_time">진행 시간</string>
+    <string name="short_long_paragraph_layout_highest_stroke">최고 타수</string>
+    <string name="short_long_paragraph_layout_current_stroke">현재 타수</string>
+    <string name="short_long_paragraph_layout_accuracy">정확도</string>
+
+    <string name="result_dialog_result">결과</string>
+    <string name="result_dialog_target_stroke">목표 타수</string>
+    <string name="result_dialog_average_stroke">평균 타수</string>
+    <string name="result_dialog_highest_stroke">최고 타수</string>
+    <string name="result_dialog_target_accuracy">목표 정확도</string>
+    <string name="result_dialog_accuracy">정확도</string>
+    <string name="result_dialog_spend_time">소요 시간</string>
+    <string name="result_dialog_stop">그만하기</string>
+    <string name="result_dialog_recall">다시하기</string>
+
+    <string name="word_layout_highest_stroke">최고 타수</string>
+    <string name="word_layout_current_stroke">현재 타수</string>
+    <string name="word_layout_accuracy">정확도</string>
+    <string name="word_input_word">입력할 단어</string>
+    <string name="word_layout_next_word">다음 단어</string>
+
+    <string name="ta">타</string>
+
+</resources>

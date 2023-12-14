@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="article_title">
+        <item>Bad</item>
+        <item>Dangerously</item>
+        <item>Snowman</item>
+        <item>Toxic</item>
+        <item>Wellerman</item>
+        <item>When i was your man</item>
+    </string-array>
+</resources>

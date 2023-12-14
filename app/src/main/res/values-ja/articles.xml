@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string-array name="article_title" tools:ignore="InconsistentArrays">
+        <item>愛を伝えたいだとか</item>
+        <item>猫</item>
+        <item>ベテルギウス</item>
+        <item>レオ</item>
+        <item>シャッタ</item>
+        <item>逆夢</item>
+    </string-array>
+</resources>

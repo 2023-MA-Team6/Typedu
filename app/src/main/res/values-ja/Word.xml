@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="word_arr">
+        <item>話す</item>
+        <item>つかむ</item>
+        <item>遊ぶ</item>
+        <item>上昇する</item>
+        <item>走る</item>
+        <item>笑う</item>
+        <item>泣く</item>
+        <item>考える</item>
+        <item>座る</item>
+        <item>動く</item>
+        <item>歩く</item>
+        <item>上昇する</item>
+        <item>跳ぶ</item>
+        <item>掃除する</item>
+        <item>置く</item>
+        <item>消す</item>
+        <item>去る</item>
+        <item>会う</item>
+        <item>落ちる</item>
+        <item>閉める</item>
+        <item>幸福</item>
+        <item>挑戦</item>
+        <item>夢</item>
+        <item>友情</item>
+        <item>学び</item>
+        <item>微笑み</item>
+        <item>芸術</item>
+        <item>冒険</item>
+        <item>協力</item>
+        <item>自由</item>
+        <item>成功</item>
+        <item>情熱</item>
+        <item>助け</item>
+        <item>準備</item>
+        <item>実践</item>
+        <item>尊重</item>
+        <item>献身</item>
+        <item>希望</item>
+        <item>達成</item>
+        <item>信頼</item>
+        <item>強化</item>
+        <item>感謝</item>
+        <item>生活</item>
+        <item>勇気</item>
+        <item>静けさ</item>
+        <item>つながり</item>
+        <item>協力</item>
+        <item>願い</item>
+        <item>知恵</item>
+        <item>質素</item>
+    </string-array>
+</resources>
