@@ -21,7 +21,7 @@
 
 
     <string name="keyboard_layout_current_stroke">Current strokes</string>
-    <string name="keyboard_layout_number_of_characters_entered">Number of characters entered</string>
+    <string name="keyboard_layout_number_of_characters_entered">Entered characters</string>
     <string name="keyboard_layout_next_word">next char</string>
 
     <string name="short_long_paragraph_layout_progress_time">Progress time</string>
